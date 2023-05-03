@@ -43,6 +43,7 @@ export default function SemYear(props: SemYearProps) {
         <ClassBox
           classes={props.classes}
           setClasses={props.setClasses}
+          grad_year={props.grad_year}
           posX={props.num}
           posY={value}
           currClass={props.currClass}

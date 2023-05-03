@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import courses from "../../../../back/data/courses.json";
 
 interface ClassOfProps {
   class: String;
@@ -7,8 +8,46 @@ interface ClassOfProps {
   setTextbox: (data: string) => void;
 }
 
+interface Class {
+  courseCode: string;
+  prerequisites: string[][];
+  season: string;
+}
+
+function parseCatalog() {
+  let catalog: Array<Class> = courses;
+  // for (var i = 0; i < courses.length; i++) {
+  //   catalog.push(JSON.parse(courses[i]));
+  // }
+  // courses.forEach((elt) => {
+  //   catalog.push(JSON.parse(elt.toString()));
+  // });
+  //let catalog: Catalog = JSON.parse(courses.toString());
+  console.log(catalog);
+}
+
 export default function Search(props: ClassOfProps) {
   const [open, setOpen] = useState(false);
+
+  let catalog: Array<Class> = courses;
+
+  const [courseList, setCourseList] = useState<Array<string>>([]);
+  //let courseList: string[] = [];
+
+  function bestMatches(text: string) {
+    let courses: string[] = [];
+    for (var i = 0; i < catalog.length; i++) {
+      if (courses.length === 4) {
+        console.log(courses);
+        setCourseList(courses);
+        return;
+      }
+      if (catalog[i].courseCode.includes(text)) {
+        courses.push(catalog[i].courseCode + ", " + catalog[i].season);
+      }
+    }
+    setCourseList(courses);
+  }
 
   const handleOpen = () => {
     setOpen(!open);
@@ -19,6 +58,7 @@ export default function Search(props: ClassOfProps) {
     if (open === false || e.target.value === "") {
       handleOpen();
     }
+    bestMatches(e.target.value);
   };
 
   function handleClick(num: number) {
@@ -26,8 +66,6 @@ export default function Search(props: ClassOfProps) {
     handleOpen();
     props.setClass(courseList[num]);
   }
-
-  const courseList = ["hello", "hi", "hey", "yo"];
 
   return (
     <div style={{ left: "15vw", top: "25vh" }}>

@@ -67,38 +67,39 @@ export default function ClassOption(props: ClassOptionProps) {
 
   function handleSubmit(type: String) {
     console.log(props.schedule);
+    let currClass: string = props.currClass.split(",")[0];
     if (
       props.currClass === "" ||
-      avoidTable.find((cat) => cat === props.currClass) ||
-      completedTable.find((cat) => cat === props.currClass) ||
-      takeTable.find((cat) => cat === props.currClass) ||
-      twoDFind<String>(props.schedule, props.currClass)
+      avoidTable.find((cat) => cat === currClass) ||
+      completedTable.find((cat) => cat === currClass) ||
+      takeTable.find((cat) => cat === currClass) ||
+      twoDFind<String>(props.schedule, currClass)
     ) {
       props.setCurrClass("");
       props.setTextbox("");
       return;
     }
     if (type === "Avoid") {
-      setAvoidTable([...avoidTable, props.currClass]);
+      setAvoidTable([...avoidTable, currClass]);
       let avoidCopy: Array<String> = avoidTable;
-      avoidCopy.push(props.currClass);
+      avoidCopy.push(currClass);
       let newArr: Array<Array<String>> = props.classes;
       newArr[0] = avoidCopy;
       props.setClasses(newArr);
       console.log(props.currClass);
     } else if (type === "Completed") {
-      setCompletedTable([...completedTable, props.currClass]);
+      setCompletedTable([...completedTable, currClass]);
       let completedCopy: Array<String> = completedTable;
-      completedCopy.push(props.currClass);
+      completedCopy.push(currClass);
       let newArr: Array<Array<String>> = props.classes;
-      newArr[0] = completedCopy;
+      newArr[1] = completedCopy;
       props.setClasses(newArr);
     } else if (type === "Take") {
-      setTakeTable([...takeTable, props.currClass]);
+      setTakeTable([...takeTable, currClass]);
       let takeCopy: Array<String> = takeTable;
-      takeCopy.push(props.currClass);
+      takeCopy.push(currClass);
       let newArr: Array<Array<String>> = props.classes;
-      newArr[0] = takeCopy;
+      newArr[2] = takeCopy;
       props.setClasses(newArr);
     } else {
       throw new Error("Should never reach here.");

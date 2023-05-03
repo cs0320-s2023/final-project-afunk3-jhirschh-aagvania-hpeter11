@@ -16,11 +16,7 @@
   },
   {
     "courseCode": "CSCI0112",
-    "prerequisites": [
-      [
-        "CSCI0111"
-      ]
-    ],
+    "prerequisites": [["CSCI0111"]],
     "season": "Fall"
   },
   {
@@ -45,14 +41,7 @@
   },
   {
     "courseCode": "CSCI0200",
-    "prerequisites": [
-      [
-        "CSCI0150",
-        "CSCI0170",
-        "CSCI0190",
-        "CSCI0112"
-      ]
-    ],
+    "prerequisites": [["CSCI0150", "CSCI0170", "CSCI0190", "CSCI0112"]],
     "season": "Both"
   },
   {
@@ -62,44 +51,23 @@
   },
   {
     "courseCode": "CSCI0300",
-    "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ]
-    ],
+    "prerequisites": [["CSCI0190", "CSCI0200"]],
     "season": "Spring"
   },
   {
     "courseCode": "CSCI0330",
-    "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ]
-    ],
+    "prerequisites": [["CSCI0190", "CSCI0200"]],
     "season": "Fall"
   },
   {
     "courseCode": "CSCI0320",
-    "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ]
-    ],
+    "prerequisites": [["CSCI0190", "CSCI0200"]],
     "season": "Both"
   },
   {
     "courseCode": "CSCI1010",
     "prerequisites": [
-      [
-        "CSCI0220",
-        "CSCI1450",
-        "APMA1650",
-        "APMA1655",
-        "CSCI1570"
-      ]
+      ["CSCI0220", "CSCI1450", "APMA1650", "APMA1655", "CSCI1570"]
     ],
     "season": "Fall"
   },
@@ -110,12 +78,7 @@
   },
   {
     "courseCode": "CSCI1230",
-    "prerequisites": [
-      [
-        "CSCI0200",
-        "CSCI0190"
-      ]
-    ],
+    "prerequisites": [["CSCI0200", "CSCI0190"]],
     "season": "Fall"
   },
   {
@@ -125,35 +88,17 @@
   },
   {
     "courseCode": "CSCI1260",
-    "prerequisites": [
-      [
-        "CSCI0220",
-        "CSCI0320",
-        "CSCI0300",
-        "CSCI0330"
-      ]
-    ],
+    "prerequisites": [["CSCI0220", "CSCI0320", "CSCI0300", "CSCI0330"]],
     "season": "Fall"
   },
   {
     "courseCode": "CSCI1270",
-    "prerequisites": [
-      [
-        "CSCI0220",
-        "CSCI0320",
-        "CSCI0300",
-        "CSCI0330"
-      ]
-    ],
+    "prerequisites": [["CSCI0220", "CSCI0320", "CSCI0300", "CSCI0330"]],
     "season": "Fall"
   },
   {
     "courseCode": "CSCI1280",
-    "prerequisites": [
-      [
-        "CSCI1250"
-      ]
-    ],
+    "prerequisites": [["CSCI1250"]],
     "season": "Spring"
   },
   {
@@ -168,79 +113,37 @@
   },
   {
     "courseCode": "CSCI1380",
-    "prerequisites": [
-      [
-        "CSCI0300",
-        "CSCI0320",
-        "CSCI0330"
-      ]
-    ],
+    "prerequisites": [["CSCI0300", "CSCI0320", "CSCI0330"]],
     "season": "Spring"
   },
   {
     "courseCode": "CSCI1410",
     "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ],
-      [
-        "CSCI0220",
-        "CSCI1450",
-        "APMA1650",
-        "APMA1655"
-      ]
+      ["CSCI0190", "CSCI0200"],
+      ["CSCI0220", "CSCI1450", "APMA1650", "APMA1655"]
     ],
     "season": "Fall"
   },
   {
     "courseCode": "CSCI1420",
     "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ],
-      [
-        "CSCI1450",
-        "APMA1650",
-        "APMA1655"
-      ],
-      [
-        "MATH0520",
-        "MATH0540"
-      ]
+      ["CSCI0190", "CSCI0200"],
+      ["CSCI1450", "APMA1650", "APMA1655"],
+      ["MATH0520", "MATH0540"]
     ],
     "season": "Spring"
   },
   {
     "courseCode": "CSCI1430",
-    "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ]
-    ],
+    "prerequisites": [["CSCI0190", "CSCI0200"]],
     "season": "Spring"
   },
   {
     "courseCode": "CSCI1440",
     "prerequisites": [
-      [
-        "MATH0180",
-        "MATH0200",
-        "MATH0350",
-        "APMA0350",
-        "APMA0360"
-      ],
-      [
-        "CSCI1450",
-        "APMA1650",
-        "APMA1655"
-      ],
-      [
-        "CSCI0220",
-        "CSCI1010"
-      ]
+      ["MATH0180", "MATH0200", "MATH0350", "APMA0350", "APMA0360"],
+      ["CSCI1450", "APMA1650", "APMA1655"],
+      ["CSCI0220", "CSCI1010"]
     ],
     "season": "Spring"
   },
@@ -252,77 +155,36 @@
   {
     "courseCode": "CSCI1470",
     "prerequisites": [
-      [
-        "CSCI0150",
-        "CSCI0170",
-        "CSCI0190",
-        "CSCI0200"
-      ],
-      [
-        "MATH0520",
-        "MATH0540"
-      ],
-      [
-        "CSCI0220",
-        "CSCI1450",
-        "APMA1650",
-        "APMA1655"
-      ]
+      ["CSCI0150", "CSCI0170", "CSCI0190", "CSCI0200"],
+      ["MATH0520", "MATH0540"],
+      ["CSCI0220", "CSCI1450", "APMA1650", "APMA1655"]
     ],
     "season": "Spring"
   },
   {
     "courseCode": "CSCI1510",
-    "prerequisites": [
-      [
-        "CSCI0220"
-      ],
-      [
-        "CSCI1010"
-      ]
-    ],
+    "prerequisites": [["CSCI0220"], ["CSCI1010"]],
     "season": "Fall"
   },
   {
     "courseCode": "CSCI1515",
     "prerequisites": [
-      [
-        "CSCI0200",
-        "CSCI0220"
-      ],
-      [
-        "CSCI0300",
-        "CSCI0330"
-      ]
+      ["CSCI0200", "CSCI0220"],
+      ["CSCI0300", "CSCI0330"]
     ],
     "season": "Fall"
   },
   {
     "courseCode": "CSCI1570",
     "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ],
-      [
-        "CSCI0220",
-        "CSCI1010",
-        "CSCI1450",
-        "APMA1650",
-        "APMA1655"
-      ]
+      ["CSCI0190", "CSCI0200"],
+      ["CSCI0220", "CSCI1010", "CSCI1450", "APMA1650", "APMA1655"]
     ],
     "season": "Spring"
   },
   {
     "courseCode": "CSCI1600",
-    "prerequisites": [
-      [
-        "CSCI0300",
-        "CSCI0320",
-        "CSCI0330"
-      ]
-    ],
+    "prerequisites": [["CSCI0300", "CSCI0320", "CSCI0330"]],
     "season": "Fall"
   },
   {
@@ -333,65 +195,34 @@
   {
     "courseCode": "CSCI1660",
     "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ],
-      [
-        "CSCI0300",
-        "CSCI0330"
-      ]
+      ["CSCI0190", "CSCI0200"],
+      ["CSCI0300", "CSCI0330"]
     ],
     "season": "Both"
   },
   {
     "courseCode": "CSCI1670",
-    "prerequisites": [
-      [
-        "CSCI0300",
-        "CSCI0330"
-      ]
-    ],
+    "prerequisites": [["CSCI0300", "CSCI0330"]],
     "season": "Both"
   },
   {
     "courseCode": "CSCI1680",
-    "prerequisites": [
-      [
-        "CSCI0300",
-        "CSCI0330"
-      ]
-    ],
+    "prerequisites": [["CSCI0300", "CSCI0330"]],
     "season": "Fall"
   },
   {
     "courseCode": "CSCI1710",
-    "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ]
-    ],
+    "prerequisites": [["CSCI0190", "CSCI0200"]],
     "season": "Both"
   },
   {
     "courseCode": "CSCI1730",
-    "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ]
-    ],
+    "prerequisites": [["CSCI0190", "CSCI0200"]],
     "season": "Fall"
   },
   {
     "courseCode": "CSCI1760",
-    "prerequisites": [
-      [
-        "CSCI0300",
-        "CSCI0330"
-      ]
-    ],
+    "prerequisites": [["CSCI0300", "CSCI0330"]],
     "season": "Fall"
   },
   {
@@ -406,12 +237,7 @@
   },
   {
     "courseCode": "CSCI1810",
-    "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ]
-    ],
+    "prerequisites": [["CSCI0190", "CSCI0200"]],
     "season": "Fall"
   },
   {
@@ -421,44 +247,22 @@
   },
   {
     "courseCode": "CSCI1950-N",
-    "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ]
-    ],
+    "prerequisites": [["CSCI0190", "CSCI0200"]],
     "season": "Fall"
   },
   {
     "courseCode": "CSCI1950-T",
-    "prerequisites": [
-      [
-        "CSCI1250"
-      ]
-    ],
+    "prerequisites": [["CSCI1250"]],
     "season": "Fall"
   },
   {
     "courseCode": "CSCI1950-U",
-    "prerequisites": [
-      [
-        "CSCI1230"
-      ],
-      [
-        "CSCI0320",
-        "CSCI1950-N"
-      ]
-    ],
+    "prerequisites": [["CSCI1230"], ["CSCI0320", "CSCI1950-N"]],
     "season": "Spring"
   },
   {
     "courseCode": "CSCI1951-A",
-    "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ]
-    ],
+    "prerequisites": [["CSCI0190", "CSCI0200"]],
     "season": "Spring"
   },
   {
@@ -468,28 +272,14 @@
   },
   {
     "courseCode": "CSCI1951-I",
-    "prerequisites": [
-      [
-        "CSCI0300",
-        "CSCI0320",
-        "CSCI0330"
-      ]
-    ],
+    "prerequisites": [["CSCI0300", "CSCI0320", "CSCI0330"]],
     "season": "Spring"
   },
   {
     "courseCode": "CSCI1951-R",
     "prerequisites": [
-      [
-        "CSCI0190",
-        "CSCI0200"
-      ],
-      [
-        "CSCI0220",
-        "CSCI1450",
-        "APMA1650",
-        "APMA1655"
-      ]
+      ["CSCI0190", "CSCI0200"],
+      ["CSCI0220", "CSCI1450", "APMA1650", "APMA1655"]
     ],
     "season": "Fall"
   },
@@ -500,30 +290,17 @@
   },
   {
     "courseCode": "CSCI1951-V",
-    "prerequisites": [
-      [
-        "CSCI0200",
-        "CSCI0190"
-      ]
-    ],
+    "prerequisites": [["CSCI0200", "CSCI0190"]],
     "season": "Fall"
   },
   {
     "courseCode": "CSCI1951-X",
-    "prerequisites": [
-      [
-        "CSCI1710"
-      ]
-    ],
+    "prerequisites": [["CSCI1710"]],
     "season": "Fall"
   },
   {
     "courseCode": "CSCI1951-Z",
-    "prerequisites": [
-      [
-        "CSCI1420"
-      ]
-    ],
+    "prerequisites": [["CSCI1420"]],
     "season": "Spring"
   },
   {
@@ -533,9 +310,7 @@
   },
   {
     "courseCode": "CSCI1952-I",
-    "prerequisites": [
-      []
-    ],
+    "prerequisites": [[]],
     "season": "Spring"
   },
   {
