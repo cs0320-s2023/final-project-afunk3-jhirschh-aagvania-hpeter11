@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Foundations",
+    "courses": [
+      [
+        "CSCI0220",
+        "MATH1530"
+      ],
+      [
+        "CSCI1010"
+      ]
+    ]
+  }
+]

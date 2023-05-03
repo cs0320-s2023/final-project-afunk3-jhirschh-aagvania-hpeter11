@@ -1,0 +1,59 @@
+[
+  {
+    "name": "Systems",
+    "coreCourses": [
+      "CSCI1380",
+      "CSCI1670",
+      "CSCI1680"
+    ],
+    "relatedCourses": [
+      "CSCI1260",
+      "CSCI1270",
+      "CSCI1600",
+      "CSCI1650",
+      "CSCI1660",
+      "CSCI1710",
+      "CSCI1730",
+      "CSCI1760"
+    ],
+    "intermediateCourses": [
+      [
+        "CSCI0300",
+        "CSCI0330"
+      ],
+      [
+        "CSCI0220"
+      ]
+    ]
+  },
+  {
+    "name": "Software Principles",
+    "coreCourses": [
+      "CSCI1260",
+      "CSCI1600",
+      "CSCI1710",
+      "CSCI1730"
+    ],
+    "relatedCourses": [
+      "CSCI1270",
+      "CSCI1380",
+      "CSCI1650",
+      "CSCI1680",
+      "CSCI1951-I",
+      "CSCI1951-T",
+      "CSCI1951-X"
+    ],
+    "intermediateCourses": [
+      [
+        "CSCI0300",
+        "CSCI0330"
+      ],
+      [
+        "CSCI0220"
+      ],
+      [
+        "CSCI0320"
+      ]
+    ]
+  }
+]

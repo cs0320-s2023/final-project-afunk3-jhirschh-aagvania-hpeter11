@@ -1,0 +1,49 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### Frontend ###
+.front/node_modules
+*.iml
+.front/target
+.front/idea
+.front/dist/
+.front/coverage/
+
+### IntelliJ IDEA ###
+.back/idea/modules.xml
+.back/idea/jarRepositories.xml
+.back/idea/compiler.xml
+.back/idea/libraries/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.back/apt_generated
+.back/classpath
+.back/factorypath
+.back/project
+.back/settings
+.back/springBeans
+.back/sts4-cache
+
+### NetBeans ###
+.back/nbproject/private/
+.back/nbbuild/
+.back/dist/
+.back/nbdist/
+.back/nb-gradle/
+.back/build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.back/vscode/
+
+### Mac OS ###
+.back/DS_Store
+
+### Local ###
+.back/idea
