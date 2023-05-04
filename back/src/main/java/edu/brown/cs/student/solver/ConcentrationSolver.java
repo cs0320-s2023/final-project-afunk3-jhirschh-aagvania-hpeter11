@@ -307,6 +307,9 @@ public final class ConcentrationSolver {
       LinearExprBuilder allCoursesRegularSum = LinearExpr.newBuilder();
 
       for (String course : pathway.coreCourses()) {
+        if (this.courseIdxMap.get(course) == null) {
+          continue;
+        }
         int coreCourseIdx = this.courseIdxMap.get(course);
         coreCoursesRegularSum.add(this.coursePathwayMatrix[coreCourseIdx][pathwayIdx]);
         allCoursesRegularSum.add(this.coursePathwayMatrix[coreCourseIdx][pathwayIdx]);
@@ -318,6 +321,9 @@ public final class ConcentrationSolver {
       }
 
       for (String course : pathway.relatedCourses()) {
+        if (this.courseIdxMap.get(course) == null) {
+          continue;
+        }
         int relatedCourseIdx = this.courseIdxMap.get(course);
         allCoursesRegularSum.add(this.coursePathwayMatrix[relatedCourseIdx][pathwayIdx]);
         // Can't count the course for the pathway if didn't take it in the first place.

@@ -17,8 +17,7 @@
       "CSCI1760",
       "CSCI1710",
       "CSCI1950-Y",
-      "CSCI 1951-V",
-      "ENGN 1640"
+      "CSCI1951-V"
     ],
     "intermediateCourses": [
       [
@@ -36,24 +35,17 @@
       "CSCI1260",
       "CSCI1320",
       "CSCI1600",
-      "CSCI1730",
       "CSCI1710",
-      "CSCI1950-Y",
-      "CSCI1951-U"
+      "CSCI1730"
     ],
     "relatedCourses": [
-      "CSCI1260",
       "CSCI1270",
-      "CSCI1320",
-      "CSCI1600",
+      "CSCI1380",
       "CSCI1650",
-      "CSCI1660",
-      "CSCI1730",
-      "CSCI1760",
-      "CSCI1710",
-      "CSCI1950-Y",
-      "ENGN1640",
-      "CSCI1951-V"
+      "CSCI1680",
+      "CSCI1951-I",
+      "CSCI1951-T",
+      "CSCI1951-X"
     ],
     "intermediateCourses": [
       [
@@ -124,25 +116,6 @@
       [
         "APMA1650",
         "APMA1655"
-      ]
-    ]
-  },
-  {
-    "name": "Computer Architecture",
-    "coreCourses": [
-      "ENGN1630",
-      "ENGN1640",
-      "ENGN1650"
-    ],
-    "relatedCourses": [
-      "CSCI1950-0",
-      "CSCI1620",
-      "CSCI1760",
-      "ENGN1600"
-    ],
-    "intermediateCourses": [
-      [
-        "CSCI0330"
       ]
     ]
   },
@@ -286,7 +259,7 @@
     ],
     "relatedCourses": [
       "CSCI1470",
-      "1950-U",
+      "CSCI1950-U",
       "CSCI1950-N",
       "CSCI1430",
       "CLPS1520",
@@ -300,8 +273,8 @@
         "CSCI0330"
       ],
       [
-        "CSCI0520",
-        "CSCI0540"
+        "MATH0520",
+        "MATH0540"
       ]
     ]
   }
