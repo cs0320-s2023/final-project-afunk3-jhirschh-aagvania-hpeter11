@@ -14,14 +14,35 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 
+/**
+ * API handler for the concentration solver.
+ */
 public final class ConcentrationHandler implements Route {
 
+  /**
+   * List of available courses.
+   */
   public final List<Course> courses;
+  /**
+   * List of available pathways.
+   */
   public final List<Pathway> pathways;
+  /**
+   * List of available intermediate groups.
+   */
   public final List<IntermediateGroup> intermediateGroups;
+  /**
+   * List of available equivalence groups.
+   */
   public final List<List<String>> equivalenceGroups;
+  /**
+   * Serializer object.
+   */
   public final Moshi moshi;
 
+  /**
+   * Constructs a handler object.
+   */
   public ConcentrationHandler(List<Course> courses, List<Pathway> pathways,
       List<IntermediateGroup> intermediateGroups, List<List<String>> equivalenceGroups) {
     this.courses = courses;
@@ -31,9 +52,13 @@ public final class ConcentrationHandler implements Route {
     this.moshi = new Moshi.Builder().build();
   }
 
+  /**
+   * Handles the request.
+   */
   @Override
   public Object handle(Request request, Response response) {
     ScheduleRequest body;
+    // Try parsing JSON request.
     try {
       JsonAdapter<ScheduleRequest> serializer = this.moshi.adapter(ScheduleRequest.class);
       body = serializer.fromJson(request.body());
@@ -47,17 +72,18 @@ public final class ConcentrationHandler implements Route {
     assert body != null;
 
     // Parse preferred courses.
-    List<String> preferredCourses = body.preferred() == null ? List.of() : body.preferred();
+    final List<String> preferredCourses = body.preferred() == null ? List.of() : body.preferred();
 
     // Parse undesirable courses.
-    List<String> undesirableCourses = body.undesirable() == null ? List.of() : body.undesirable();
+    final List<String> undesirableCourses =
+        body.undesirable() == null ? List.of() : body.undesirable();
 
     // Parse preferred pathways.
-    List<String> preferredPathways =
+    final List<String> preferredPathways =
         body.preferredPathways() == null ? List.of() : body.preferredPathways();
 
     // Parse partial assignment.
-    List<Assignment> partialAssignment;
+    final List<Assignment> partialAssignment;
     try {
       if (body.partialAssignment() == null || body.partialAssignment().size() == 0) {
         throw new IllegalArgumentException("Partial assignment is empty.");
@@ -72,6 +98,7 @@ public final class ConcentrationHandler implements Route {
           } else if (assignment.semester().season() == null) {
             throw new IllegalArgumentException("Missing season field of some assignment.");
           } else {
+            // Check that no extraneous courses are present.
             for (String assignedCourse : assignment.courses()) {
               if (this.courses.stream()
                   .noneMatch((course) -> Objects.equals(course.courseCode(), assignedCourse))) {
@@ -89,6 +116,7 @@ public final class ConcentrationHandler implements Route {
     }
     partialAssignment = body.partialAssignment();
 
+    // Check that no extraneous courses are present.
     for (String preferredCourse : preferredCourses) {
       if (this.courses.stream()
           .noneMatch((course) -> Objects.equals(course.courseCode(), preferredCourse))) {
@@ -100,6 +128,7 @@ public final class ConcentrationHandler implements Route {
       }
     }
 
+    // Check that no extraneous courses are present.
     for (String undesirableCourse : undesirableCourses) {
       if (this.courses.stream()
           .noneMatch((course) -> Objects.equals(course.courseCode(), undesirableCourse))) {
@@ -112,22 +141,26 @@ public final class ConcentrationHandler implements Route {
     }
 
     // Course load parameters.
-    final int minCoursesPerSemester = 2;
-    final int maxCoursesPerSemester = 4;
+    final int minCoursesPerSemester = 0;
+    final int maxCoursesPerSemester = 5;
     final int minTotalCourses = 16;
     final int minPathwaysCompleted = 2;
     final int minIntermediateCourses = 2;
 
+    // Instantiate solver parameters.
     SolverParams params = new SolverParams(this.courses, partialAssignment, preferredCourses,
         undesirableCourses, this.pathways, preferredPathways, this.intermediateGroups,
         this.equivalenceGroups, minCoursesPerSemester, maxCoursesPerSemester, minTotalCourses,
         minPathwaysCompleted, minIntermediateCourses);
 
+    // Instantiate solver.
     ConcentrationSolver solver = new ConcentrationSolver(params);
     solver.buildConstraints();
 
+    // And solve.
     boolean hasSolution = solver.solve();
 
+    // Serialize solution or failure response.
     if (!hasSolution) {
       ScheduleFailureResponse failureResponse = new ScheduleFailureResponse("No solution.");
       JsonAdapter<ScheduleFailureResponse> serializer = this.moshi.adapter(

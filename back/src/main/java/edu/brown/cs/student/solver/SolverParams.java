@@ -7,6 +7,9 @@ import edu.brown.cs.student.data.Pathway;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Parameters to the concentration solver.
+ */
 public record SolverParams(List<Course> courses, List<Assignment> partialAssignment,
                            List<String> preferredCourses, List<String> undesirableCourses,
 
@@ -16,6 +19,9 @@ public record SolverParams(List<Course> courses, List<Assignment> partialAssignm
                            int maxCoursesPerSemester, int minTotalCourses, int minPathwaysCompleted,
                            int minIntermediateCourses) {
 
+  /**
+   * Sorts the courses from a partial assignment.
+   */
   public SolverParams {
     partialAssignment.sort(Comparator.comparing(Assignment::semester));
   }
