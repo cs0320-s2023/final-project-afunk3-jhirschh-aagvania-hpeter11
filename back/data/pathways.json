@@ -9,12 +9,16 @@
     "relatedCourses": [
       "CSCI1260",
       "CSCI1270",
+      "CSCI1320",
       "CSCI1600",
       "CSCI1650",
       "CSCI1660",
-      "CSCI1710",
       "CSCI1730",
-      "CSCI1760"
+      "CSCI1760",
+      "CSCI1710",
+      "CSCI1950-Y",
+      "CSCI 1951-V",
+      "ENGN 1640"
     ],
     "intermediateCourses": [
       [
@@ -30,18 +34,26 @@
     "name": "Software Principles",
     "coreCourses": [
       "CSCI1260",
+      "CSCI1320",
       "CSCI1600",
+      "CSCI1730",
       "CSCI1710",
-      "CSCI1730"
+      "CSCI1950-Y",
+      "CSCI1951-U"
     ],
     "relatedCourses": [
+      "CSCI1260",
       "CSCI1270",
-      "CSCI1380",
+      "CSCI1320",
+      "CSCI1600",
       "CSCI1650",
-      "CSCI1680",
-      "CSCI1951-I",
-      "CSCI1951-T",
-      "CSCI1951-X"
+      "CSCI1660",
+      "CSCI1730",
+      "CSCI1760",
+      "CSCI1710",
+      "CSCI1950-Y",
+      "ENGN1640",
+      "CSCI1951-V"
     ],
     "intermediateCourses": [
       [
@@ -53,6 +65,243 @@
       ],
       [
         "CSCI0320"
+      ]
+    ]
+  },
+  {
+    "name": "Artificial Intelligence/Machine Learning",
+    "coreCourses": [
+      "CSCI1410",
+      "CSCI1420",
+      "CSCI1430",
+      "CSCI1460",
+      "CSCI1470",
+      "CSCI1850",
+      "CSCI1951-R",
+      "CSCI1952-Q"
+    ],
+    "relatedCourses": [
+      "CSCI1440",
+      "CSCI1550",
+      "CSCI1951-A",
+      "CSCI1951-C",
+      "CSCI1951-Z",
+      "CSCI1952-I",
+      "CLPS1850",
+      "APMA2070",
+      "ENGN1610"
+    ],
+    "intermediateCourses": [
+      [
+        "APMA1650",
+        "APMA1655"
+      ],
+      [
+        "MATH0520",
+        "MATH0540"
+      ]
+    ]
+  },
+  {
+    "name": "Computational Biology",
+    "coreCourses": [
+      "CSCI1810",
+      "CSCI1820",
+      "CSCI1850"
+    ],
+    "relatedCourses": [
+      "CSCI1420",
+      "CSCI1430",
+      "CSCI1470",
+      "CSCI1951-A",
+      "CLPS1520"
+    ],
+    "intermediateCourses": [
+      [
+        "CSCI0220",
+        "CSCI1010"
+      ],
+      [
+        "APMA1650",
+        "APMA1655"
+      ]
+    ]
+  },
+  {
+    "name": "Computer Architecture",
+    "coreCourses": [
+      "ENGN1630",
+      "ENGN1640",
+      "ENGN1650"
+    ],
+    "relatedCourses": [
+      "CSCI1950-0",
+      "CSCI1620",
+      "CSCI1760",
+      "ENGN1600"
+    ],
+    "intermediateCourses": [
+      [
+        "CSCI0330"
+      ]
+    ]
+  },
+  {
+    "name": "Design",
+    "coreCourses": [
+      "CSCI1300",
+      "CSCI1370",
+      "CSCI1951-C"
+    ],
+    "relatedCourses": [
+      "CSCI1230",
+      "CSCI1320",
+      "CSCI1360",
+      "CSCI1600",
+      "CSCI1951-A",
+      "CSCI1951-I",
+      "CSCI1951-O",
+      "CSCI1951-V",
+      "CSCI1951-S",
+      "CSCI1951-T",
+      "CSCI1952-B",
+      "VISA1720",
+      "ENGN1931-I"
+    ],
+    "intermediateCourses": [
+      [
+        "CSCI0300",
+        "CSCI0320",
+        "CSCI0330"
+      ],
+      [
+        "APMA1650",
+        "APMA1655"
+      ]
+    ]
+  },
+  {
+    "name": "Security",
+    "coreCourses": [
+      "CSCI1510",
+      "CSCI1515",
+      "CSCI1650",
+      "CSCI1660"
+    ],
+    "relatedCourses": [
+      "CSCI1320",
+      "CSCI1360",
+      "CSCI1380",
+      "CSCI1040",
+      "CSCI1040",
+      "CSCI1730",
+      "CSCI1800",
+      "CSCI1805",
+      "CSCI1710",
+      "CSCI1950-Y",
+      "CSCI1951-L"
+    ],
+    "intermediateCourses": [
+      [
+        "CSCI0220",
+        "APMA1650",
+        "APMA1655"
+      ],
+      [
+        "CSCI0300",
+        "CSCI0330"
+      ]
+    ]
+  },
+  {
+    "name": "Data",
+    "coreCourses": [
+      "CSCI1270",
+      "CSCI1420",
+      "CSCI1951-A"
+    ],
+    "relatedCourses": [
+      "CSCI1550",
+      "CSCI1580"
+    ],
+    "intermediateCourses": [
+      [
+        "CSCI0300",
+        "CSCI0320",
+        "CSCI0330"
+      ],
+      [
+        "MATH0520",
+        "MATH0540"
+      ]
+    ]
+  },
+  {
+    "name": "Theory",
+    "coreCourses": [
+      "CSCI1510",
+      "CSCI1550",
+      "CSCI1570",
+      "CSCI1760",
+      "CSCI1951-W",
+      "CSCI1951-X"
+    ],
+    "relatedCourses": [
+      "CSCI1440",
+      "CSCI1810",
+      "CSCI1820",
+      "CSCI1950-H",
+      "CSCI1710",
+      "CSCI1950-Y",
+      "CSCI1951-G",
+      "CSCI1952-Q"
+    ],
+    "intermediateCourses": [
+      [
+        "APMA1650",
+        "APMA1655"
+      ],
+      [
+        "CSCI1010"
+      ],
+      [
+        "MATH0520",
+        "MATH0540"
+      ]
+    ]
+  },
+  {
+    "name": "Visual Computing",
+    "coreCourses": [
+      "CSCI1230",
+      "CSCI1250",
+      "CSCI1280",
+      "CSCI1290",
+      "CSCI1300",
+      "CSCI1370",
+      "CSCI1430",
+      "CSCI1950-T",
+      "CSCI1951-S",
+      "CSCI1951-T"
+    ],
+    "relatedCourses": [
+      "CSCI1470",
+      "1950-U",
+      "CSCI1950-N",
+      "CSCI1430",
+      "CLPS1520",
+      "DATA1200",
+      "CSCI1951-V"
+    ],
+    "intermediateCourses": [
+      [
+        "CSCI0300",
+        "CSCI0320",
+        "CSCI0330"
+      ],
+      [
+        "CSCI0520",
+        "CSCI0540"
       ]
     ]
   }
