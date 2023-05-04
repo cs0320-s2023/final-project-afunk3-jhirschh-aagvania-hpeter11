@@ -7,15 +7,15 @@ target/
 .front/node_modules
 *.iml
 .front/target
-.front/idea
+.front/.idea
 .front/dist/
 .front/coverage/
 
 ### IntelliJ IDEA ###
-.back/idea/modules.xml
-.back/idea/jarRepositories.xml
-.back/idea/compiler.xml
-.back/idea/libraries/
+.back/.idea/modules.xml
+.back/.idea/jarRepositories.xml
+.back/.idea/compiler.xml
+.back/.idea/libraries/
 *.iws
 *.iml
 *.ipr
@@ -46,4 +46,4 @@ target/
 .back/DS_Store
 
 ### Local ###
-.back/idea
+.back/.idea
