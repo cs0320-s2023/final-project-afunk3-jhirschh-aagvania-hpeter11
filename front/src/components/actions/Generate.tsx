@@ -31,7 +31,7 @@ export const generate = async function (
       };
     }
 
-    const inputJson: string = {
+    const inputJson = {
       preferred: optionTable[2],
       undesirable: optionTable[0],
       preferredPathways: prefPaths,
