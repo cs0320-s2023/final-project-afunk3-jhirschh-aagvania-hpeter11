@@ -31,14 +31,19 @@ export const generate = async function (
       };
     }
 
-    const inputJson = {
+    const inputJson: string = {
       preferred: optionTable[2],
       undesirable: optionTable[0],
       preferredPathways: prefPaths,
       partialAssignment: courses,
     };
+
     const request = new Request("http://localhost:3232/schedule", {
-      method: "GET",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
       body: JSON.stringify(inputJson),
     });
     fetch(request)
