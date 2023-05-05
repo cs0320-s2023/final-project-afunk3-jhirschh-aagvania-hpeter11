@@ -29,6 +29,7 @@ export const generate = async function (
         },
         courses: semClasses[i],
       };
+      courses.push(coursei);
     }
 
     const inputJson = {
@@ -37,6 +38,8 @@ export const generate = async function (
       preferredPathways: prefPaths,
       partialAssignment: courses,
     };
+
+    console.log(inputJson);
 
     const request = new Request("http://localhost:3232/schedule", {
       method: "POST",

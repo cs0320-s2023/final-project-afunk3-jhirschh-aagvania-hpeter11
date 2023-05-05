@@ -80,7 +80,7 @@ public class Main {
     });
 
     // Main solver endpoint.
-    Spark.get("schedule",
+    Spark.post("schedule",
         new ConcentrationHandler(courses, pathways, intermediateGroups, equivalenceGroups));
     Spark.init();
 
