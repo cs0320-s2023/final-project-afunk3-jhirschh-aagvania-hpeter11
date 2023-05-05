@@ -8,22 +8,10 @@ interface ClassOfProps {
   setTextbox: (data: string) => void;
 }
 
-interface Class {
+export interface Class {
   courseCode: string;
   prerequisites: string[][];
   season: string;
-}
-
-function parseCatalog() {
-  let catalog: Array<Class> = courses;
-  // for (var i = 0; i < courses.length; i++) {
-  //   catalog.push(JSON.parse(courses[i]));
-  // }
-  // courses.forEach((elt) => {
-  //   catalog.push(JSON.parse(elt.toString()));
-  // });
-  //let catalog: Catalog = JSON.parse(courses.toString());
-  console.log(catalog);
 }
 
 export default function Search(props: ClassOfProps) {
@@ -32,7 +20,6 @@ export default function Search(props: ClassOfProps) {
   let catalog: Array<Class> = courses;
 
   const [courseList, setCourseList] = useState<Array<string>>([]);
-  //let courseList: string[] = [];
 
   function bestMatches(text: string) {
     let courses: string[] = [];
@@ -81,42 +68,50 @@ export default function Search(props: ClassOfProps) {
       />
       {open ? (
         <ul className="SearchDropdown">
-          <li>
-            <button
-              className="SearchOption"
-              style={{ left: "11vw", top: "45vh" }}
-              onClick={(e) => handleClick(0)}
-            >
-              {courseList[0]}
-            </button>
-          </li>
-          <li>
-            <button
-              className="SearchOption"
-              style={{ left: "11vw", top: "49.9vh" }}
-              onClick={(e) => handleClick(1)}
-            >
-              {courseList[1]}
-            </button>
-          </li>
-          <li>
-            <button
-              className="SearchOption"
-              style={{ left: "11vw", top: "54.9vh" }}
-              onClick={(e) => handleClick(2)}
-            >
-              {courseList[2]}
-            </button>
-          </li>
-          <li>
-            <button
-              className="SearchOption"
-              style={{ left: "11vw", top: "59.9vh" }}
-              onClick={(e) => handleClick(3)}
-            >
-              {courseList[3]}
-            </button>
-          </li>
+          {courseList.length >= 1 ? (
+            <li>
+              <button
+                className="SearchOption"
+                style={{ left: "11vw", top: "45vh" }}
+                onClick={(e) => handleClick(0)}
+              >
+                {courseList[0]}
+              </button>
+            </li>
+          ) : null}
+          {courseList.length >= 2 ? (
+            <li>
+              <button
+                className="SearchOption"
+                style={{ left: "11vw", top: "49.9vh" }}
+                onClick={(e) => handleClick(1)}
+              >
+                {courseList[1]}
+              </button>
+            </li>
+          ) : null}
+          {courseList.length >= 3 ? (
+            <li>
+              <button
+                className="SearchOption"
+                style={{ left: "11vw", top: "54.9vh" }}
+                onClick={(e) => handleClick(2)}
+              >
+                {courseList[2]}
+              </button>
+            </li>
+          ) : null}
+          {courseList.length >= 4 ? (
+            <li>
+              <button
+                className="SearchOption"
+                style={{ left: "11vw", top: "59.9vh" }}
+                onClick={(e) => handleClick(3)}
+              >
+                {courseList[3]}
+              </button>
+            </li>
+          ) : null}
         </ul>
       ) : null}
     </div>

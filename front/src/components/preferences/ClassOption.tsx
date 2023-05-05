@@ -133,7 +133,7 @@ export default function ClassOption(props: ClassOptionProps) {
         style={{ left: "9.9vw", top: "0vh" }}
         onClick={(e) => handleSubmit("Completed")}
       >
-        Completed
+        Prerequisites
       </button>
       <div className="OptionList" style={{ left: "9.9vw", top: "5vh" }}>
         {makeTable(completedTable)}
