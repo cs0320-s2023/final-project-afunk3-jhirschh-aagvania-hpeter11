@@ -4,6 +4,9 @@ import edu.brown.cs.student.data.Assignment;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Success response by the concentration handler.
+ */
 public record ScheduleSuccessResponse(String result, List<Assignment> schedule,
                                       Map<String, List<String>> pathways) {
 

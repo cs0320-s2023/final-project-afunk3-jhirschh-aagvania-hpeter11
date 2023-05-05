@@ -40,7 +40,7 @@ public class ConcentrationSolverTest {
     // This can be performed only once per server instantiation.
     Loader.loadNativeLibraries();
 
-    // All schedule available.
+    // All courses available.
     Moshi moshi = new Moshi.Builder().build();
     JsonAdapter<List<Course>> courseSerializer = moshi.adapter(
         Types.newParameterizedType(List.class, Course.class));

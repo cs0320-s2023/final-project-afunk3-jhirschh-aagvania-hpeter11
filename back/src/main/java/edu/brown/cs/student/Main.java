@@ -17,32 +17,41 @@ import java.nio.file.Paths;
 import java.util.List;
 import spark.Spark;
 
+/**
+ * Program entry point.
+ */
 public class Main {
 
+  /**
+   * Main method.
+   *
+   * @param args program arguments.
+   * @throws IOException if loading course data fails.
+   */
   public static void main(String[] args) throws IOException {
     // This can be performed only once per server instantiation.
     Loader.loadNativeLibraries();
 
-    // All schedule available.
+    // Load all available courses into memory.
     Moshi moshi = new Moshi.Builder().build();
     JsonAdapter<List<Course>> courseSerializer = moshi.adapter(
         Types.newParameterizedType(List.class, Course.class));
     List<Course> courses = courseSerializer.fromJson(
         Files.readString(Paths.get("data/courses.json")));
 
-    // All pathways available.
+    // Load all available pathways into memory.
     JsonAdapter<List<Pathway>> pathwaySerializer = moshi.adapter(
         Types.newParameterizedType(List.class, Pathway.class));
     List<Pathway> pathways = pathwaySerializer.fromJson(
         Files.readString(Paths.get("data/pathways.json")));
 
-    // All intermediate groups available.
+    // Load all available intermediate groups into memory.
     JsonAdapter<List<IntermediateGroup>> intermediateGroupSerializer = moshi.adapter(
         Types.newParameterizedType(List.class, IntermediateGroup.class));
     List<IntermediateGroup> intermediateGroups = intermediateGroupSerializer.fromJson(
         Files.readString(Paths.get("data/intermediateGroups.json")));
 
-    // Courses that cannot be taken together.
+    // Load all courses that cannot be taken together into memory.
     JsonAdapter<List<List<String>>> equivalenceGroupSerializer = moshi.adapter(
         Types.newParameterizedType(List.class,
             Types.newParameterizedType(List.class, String.class)));
@@ -70,9 +79,11 @@ public class Main {
       response.header("Content-Type", "application/json");
     });
 
+    // Main solver endpoint.
     Spark.get("schedule",
         new ConcentrationHandler(courses, pathways, intermediateGroups, equivalenceGroups));
     Spark.init();
+
     Spark.awaitInitialization();
     System.out.println("Server started.");
   }

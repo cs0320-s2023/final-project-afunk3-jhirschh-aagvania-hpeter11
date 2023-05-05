@@ -1,3 +1,6 @@
 package edu.brown.cs.student.data;
 
-public enum Season {Both, Spring, Fall}
+/**
+ * When the course is offered.
+ */
+public enum Season { Both, Spring, Fall }

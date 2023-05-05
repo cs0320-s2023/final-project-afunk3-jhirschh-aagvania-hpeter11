@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Wrapper around CP-solver to generate concentration schedules.
+ */
 public final class ConcentrationSolver {
 
   /**
@@ -32,18 +35,31 @@ public final class ConcentrationSolver {
    * Indicates whether a course is assigned to be taken during a semester.
    */
   private final BoolVar[][] courseSemesterMatrix;
+  /**
+   * Various solver parameters.
+   */
   SolverParams params;
   /**
    * Indicates whether a given course was used to satisfy a given pathway.
    */
   private BoolVar[][] coursePathwayMatrix;
+  /**
+   * Course schedule.
+   */
   private List<Assignment> schedule;
+  /**
+   * Assignment of courses to pathways.
+   */
   private Map<String, List<String>> pathwayCourseAssignment;
 
+  /**
+   * Instantiates concentration solver.
+   *
+   * @param params various solver parameters.
+   */
   public ConcentrationSolver(SolverParams params) {
-    // Instantiate all fields.
+    // Instantiate parameters.
     this.params = params;
-
     this.model = new CpModel();
     this.courseIdxMap = new HashMap<>();
 
@@ -59,16 +75,29 @@ public final class ConcentrationSolver {
     }
   }
 
+  /**
+   * Query the schedule.
+   *
+   * @return previously generated schedule.
+   */
   public List<Assignment> getSchedule() {
     return schedule;
   }
 
+  /**
+   * Query the pathway-course assignment.
+   *
+   * @return previously generated pathway-course assignment.
+   */
   public Map<String, List<String>> getPathwayCourseAssignment() {
     return pathwayCourseAssignment;
   }
 
+  /**
+   * Populate constraints for the model.
+   */
   public void buildConstraints() {
-    // Satisfy partial assignment.
+    // Satisfy partial assignment provided by the user.
     for (int semesterIdx = 0; semesterIdx < this.params.partialAssignment().size(); semesterIdx++) {
       for (int assignedCourseIdx = 0;
           assignedCourseIdx < this.params.partialAssignment().get(semesterIdx).courses().size();
@@ -79,7 +108,7 @@ public final class ConcentrationSolver {
       }
     }
 
-    // Enforce no more than 4 courses per semester.
+    // Enforce taking no more than 4 courses per semester.
     for (int semesterIdx = 0; semesterIdx < this.params.partialAssignment().size(); semesterIdx++) {
       LinearExprBuilder numCoursesInSemester = LinearExpr.newBuilder();
       for (int courseIdx = 0; courseIdx < this.params.courses().size(); courseIdx++) {
@@ -121,14 +150,14 @@ public final class ConcentrationSolver {
       }
     }
 
-    // Satisfy the student preferences.
+    // Satisfy the student preferred courses.
     for (String course : this.params.preferredCourses()) {
       int courseIdx = this.courseIdxMap.get(course);
       LinearExpr numTakenCourse = LinearExpr.sum(this.courseSemesterMatrix[courseIdx]);
       this.model.addEquality(numTakenCourse, 1);
     }
 
-    // Satisfy the student preferences.
+    // Satisfy the student undesirable courses.
     for (String course : this.params.undesirableCourses()) {
       int courseIdx = this.courseIdxMap.get(course);
       LinearExpr numTakenCourse = LinearExpr.sum(this.courseSemesterMatrix[courseIdx]);
@@ -161,6 +190,13 @@ public final class ConcentrationSolver {
     }
   }
 
+  /**
+   * Generates a boolean variable, representing whether the prerequisites for the given course were
+   * satisfied.
+   *
+   * @param course any course with prerequisites.
+   * @return boolean variable, representing the satisfaction of prerequisites.
+   */
   private BoolVar satisfiesPrerequisitesConstraint(Course course) {
     int courseIdx = this.courseIdxMap.get(course.courseCode());
     BoolVar satisfiesPrerequisites = this.model.newBoolVar(
@@ -174,7 +210,7 @@ public final class ConcentrationSolver {
     BoolVar[] clauseVars = new BoolVar[course.prerequisites().size()];
     // Look through every clause in the prerequisites array.
     for (int clauseIdx = 0; clauseIdx < course.prerequisites().size(); clauseIdx++) {
-      // Current clause aka OR-group of prerequisites
+      // Current clause (OR-group) of prerequisites.
       List<String> clause = course.prerequisites().get(clauseIdx);
       // Create a variable for the prerequisite group.
       clauseVars[clauseIdx] = this.model.newBoolVar(
@@ -197,13 +233,13 @@ public final class ConcentrationSolver {
               semesterIdx + 1);
           prerequisiteSum.add(this.courseSemesterMatrix[prerequisiteIdx][semesterIdx]);
         }
-        // Intermediate variable, indicates whether the prerequisite was taken.
+        // Intermediate variable, indicates whether the prerequisite was ever taken.
         BoolVar prerequisiteTaken = this.model.newBoolVar(
             course.courseCode() + " satisfies prerequisite (taken) " + clause.get(literalIdx));
         // Intermediate variable, indicates whether the prerequisite was taken before.
         BoolVar prerequisiteOrder = this.model.newBoolVar(
-            course.courseCode() + " satisfies prerequisite (ordered) " + clause.get(literalIdx));
-        // Sum constraint on the prerequisite
+            course.courseCode() + " satisfies prerequisite (order) " + clause.get(literalIdx));
+        // Non-weighted sum constraint on the prerequisite.
         this.model.addEquality(prerequisiteSum, 1).onlyEnforceIf(prerequisiteTaken);
         // Weighted sum constraint on the prerequisite.
         this.model.addLessThan(prerequisiteWeightedSum, courseWeightedSum)
@@ -215,13 +251,19 @@ public final class ConcentrationSolver {
       // Only enforce the OR-group if the clause is satisfied.
       this.model.addBoolOr(literalVars).onlyEnforceIf(clauseVars[clauseIdx]);
     }
-    // Only enforce the AND-group if the whole course prerequisites are satisfied.
+    // Only enforce the AND-group if the course prerequisites are satisfied.
     this.model.addBoolAnd(clauseVars).onlyEnforceIf(satisfiesPrerequisites);
     return satisfiesPrerequisites;
   }
 
+  /**
+   * Generates a boolean variable, representing whether the requirements for the pathways were
+   * satisfied.
+   *
+   * @return boolean variable, representing the satisfaction of pathway requirements.
+   */
   private BoolVar satisfiesPathwaysConstraint() {
-    // Indicates, whether each pathway is satisfied.
+    // Indicate, whether each pathway is satisfied.
     BoolVar[] pathwaySatisfied = new BoolVar[this.params.pathways().size()];
     // Indicates whether a given course was used to satisfy a given pathway.
     this.coursePathwayMatrix = new BoolVar[this.params.courses().size()][this.params.pathways()
@@ -253,11 +295,11 @@ public final class ConcentrationSolver {
     for (int pathwayIdx = 0; pathwayIdx < this.params.pathways().size(); pathwayIdx++) {
       Pathway pathway = this.params.pathways().get(pathwayIdx);
 
-      BoolVar pathwayCoreSatisfied = this.model.newBoolVar(
+      final BoolVar pathwayCoreSatisfied = this.model.newBoolVar(
           "Core courses satisfied for pathway " + pathway.name());
-      BoolVar pathwayAllSatisfied = this.model.newBoolVar(
+      final BoolVar pathwayAllSatisfied = this.model.newBoolVar(
           "All courses satisfied for pathway " + pathway.name());
-      BoolVar pathwayIntermediateSatisfied = this.model.newBoolVar(
+      final BoolVar pathwayIntermediateSatisfied = this.model.newBoolVar(
           "All courses satisfied for pathway " + pathway.name());
 
       // Total number of core and core & related courses taken.
@@ -265,6 +307,9 @@ public final class ConcentrationSolver {
       LinearExprBuilder allCoursesRegularSum = LinearExpr.newBuilder();
 
       for (String course : pathway.coreCourses()) {
+        if (this.courseIdxMap.get(course) == null) {
+          continue;
+        }
         int coreCourseIdx = this.courseIdxMap.get(course);
         coreCoursesRegularSum.add(this.coursePathwayMatrix[coreCourseIdx][pathwayIdx]);
         allCoursesRegularSum.add(this.coursePathwayMatrix[coreCourseIdx][pathwayIdx]);
@@ -276,6 +321,9 @@ public final class ConcentrationSolver {
       }
 
       for (String course : pathway.relatedCourses()) {
+        if (this.courseIdxMap.get(course) == null) {
+          continue;
+        }
         int relatedCourseIdx = this.courseIdxMap.get(course);
         allCoursesRegularSum.add(this.coursePathwayMatrix[relatedCourseIdx][pathwayIdx]);
         // Can't count the course for the pathway if didn't take it in the first place.
@@ -295,7 +343,7 @@ public final class ConcentrationSolver {
       BoolVar[] clauseVars = new BoolVar[pathway.intermediateCourses().size()];
       // Look through every clause in the intermediate course array.
       for (int clauseIdx = 0; clauseIdx < pathway.intermediateCourses().size(); clauseIdx++) {
-        // Current clause aka OR-group of intermediate courses.
+        // Current clause (OR-group) of intermediate courses.
         List<String> clause = pathway.intermediateCourses().get(clauseIdx);
         // Create a variable for the intermediate course group.
         clauseVars[clauseIdx] = this.model.newBoolVar(
@@ -332,8 +380,14 @@ public final class ConcentrationSolver {
     return pathwaysSatisfied;
   }
 
+  /**
+   * Generates a boolean variable, representing whether the requirements for the intermediate
+   * courses were satisfied.
+   *
+   * @return boolean variable, representing the satisfaction of intermediate course requirements.
+   */
   private BoolVar satisfiesIntermediateCoursesConstraint() {
-    BoolVar intermediateCoursesSatisfied = this.model.newBoolVar(
+    final BoolVar intermediateCoursesSatisfied = this.model.newBoolVar(
         "All intermediate courses are satisfied");
     // The total number of intermediate courses taken.
     LinearExprBuilder totalIntermediateCourses = LinearExpr.newBuilder();
@@ -398,6 +452,11 @@ public final class ConcentrationSolver {
     return intermediateCoursesSatisfied;
   }
 
+  /**
+   * Try solving the model, populating the schedule and pathway-course assignment.
+   *
+   * @return whether there exists a solution for the given parameters.
+   */
   public boolean solve() {
     // Create a solver.
     CpSolver solver = new CpSolver();
@@ -406,6 +465,7 @@ public final class ConcentrationSolver {
     // And solve.
     CpSolverStatus status = solver.solve(this.model);
 
+    // If not feasible, return false.
     if (status != CpSolverStatus.OPTIMAL && status != CpSolverStatus.FEASIBLE) {
       return false;
     }
