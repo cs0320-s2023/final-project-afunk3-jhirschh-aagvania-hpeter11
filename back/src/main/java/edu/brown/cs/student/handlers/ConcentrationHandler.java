@@ -93,6 +93,8 @@ public final class ConcentrationHandler implements Route {
             throw new IllegalArgumentException("Missing semester field of some assignment.");
           } else if (assignment.courses() == null) {
             throw new IllegalArgumentException("Missing courses field of some assignment.");
+          } else if (assignment.frozen() == null) {
+            throw new IllegalArgumentException("Missing frozen field of some assignment.");
           } else if (assignment.semester().year() == null) {
             throw new IllegalArgumentException("Missing year field of some assignment.");
           } else if (assignment.semester().season() == null) {
@@ -142,7 +144,7 @@ public final class ConcentrationHandler implements Route {
 
     // Course load parameters.
     final int minCoursesPerSemester = 0;
-    final int maxCoursesPerSemester = 5;
+    final int maxCoursesPerSemester = 3;
     final int minTotalCourses = 16;
     final int minPathwaysCompleted = 2;
     final int minIntermediateCourses = 2;

@@ -8,6 +8,6 @@ import java.util.List;
  * @param semester semester object.
  * @param courses  list of course codes.
  */
-public record Assignment(Semester semester, List<String> courses) {
+public record Assignment(Semester semester, List<String> courses, Boolean frozen) {
 
 }

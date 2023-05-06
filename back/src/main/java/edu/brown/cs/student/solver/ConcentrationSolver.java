@@ -106,10 +106,21 @@ public final class ConcentrationSolver {
             this.params.partialAssignment().get(semesterIdx).courses().get(assignedCourseIdx));
         this.model.addEquality(this.courseSemesterMatrix[courseIdx][semesterIdx], 1);
       }
+      if (this.params.partialAssignment().get(semesterIdx).frozen()) {
+        LinearExprBuilder semesterSum = LinearExpr.newBuilder();
+        for (int courseIdx = 0; courseIdx < params.courses().size(); courseIdx++) {
+          semesterSum.addTerm(courseSemesterMatrix[courseIdx][semesterIdx], 1);
+        }
+        this.model.addEquality(semesterSum,
+            this.params.partialAssignment().get(semesterIdx).courses().size());
+      }
     }
 
     // Enforce taking no more than 4 courses per semester.
     for (int semesterIdx = 0; semesterIdx < this.params.partialAssignment().size(); semesterIdx++) {
+      if (this.params.partialAssignment().get(semesterIdx).frozen()) {
+        continue;
+      }
       LinearExprBuilder numCoursesInSemester = LinearExpr.newBuilder();
       for (int courseIdx = 0; courseIdx < this.params.courses().size(); courseIdx++) {
         numCoursesInSemester.add(this.courseSemesterMatrix[courseIdx][semesterIdx]);
@@ -480,7 +491,8 @@ public final class ConcentrationSolver {
         }
       }
       Semester currentSemester = this.params.partialAssignment().get(semesterIdx).semester();
-      schedule.add(new Assignment(currentSemester, semesterCourses));
+      schedule.add(new Assignment(currentSemester, semesterCourses,
+          this.params.partialAssignment().get(semesterIdx).frozen()));
     }
 
     this.pathwayCourseAssignment = new HashMap<>();

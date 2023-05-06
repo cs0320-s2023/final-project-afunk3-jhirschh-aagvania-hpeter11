@@ -68,14 +68,14 @@ public class ConcentrationSolverTest {
   @Test
   public void solverFuzzTest() {
     List<Assignment> partialAssignment = new ArrayList<>(
-        List.of(new Assignment(new Semester(2023, Season.Fall), List.of()),
-            new Assignment(new Semester(2024, Season.Spring), List.of()),
-            new Assignment(new Semester(2024, Season.Fall), List.of()),
-            new Assignment(new Semester(2025, Season.Spring), List.of()),
-            new Assignment(new Semester(2025, Season.Fall), List.of()),
-            new Assignment(new Semester(2026, Season.Spring), List.of()),
-            new Assignment(new Semester(2026, Season.Fall), List.of()),
-            new Assignment(new Semester(2027, Season.Spring), List.of())));
+        List.of(new Assignment(new Semester(2023, Season.Fall), List.of(), false),
+            new Assignment(new Semester(2024, Season.Spring), List.of(), false),
+            new Assignment(new Semester(2024, Season.Fall), List.of(), false),
+            new Assignment(new Semester(2025, Season.Spring), List.of(), false),
+            new Assignment(new Semester(2025, Season.Fall), List.of(), false),
+            new Assignment(new Semester(2026, Season.Spring), List.of(), false),
+            new Assignment(new Semester(2026, Season.Fall), List.of(), false),
+            new Assignment(new Semester(2027, Season.Spring), List.of(), false)));
 
     List<String> preferredCourses = List.of("CSCI0190");
     List<String> undesirableCourses = List.of("APMA1650");
