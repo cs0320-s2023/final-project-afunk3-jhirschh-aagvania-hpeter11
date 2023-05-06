@@ -1,10 +1,13 @@
 import { SetStateAction, useState } from "react";
 
+// interface containing the React inputs to the class
 interface PathwayProps {
   num: number;
   setPathway: (data: string) => void;
+  pathway: String;
 }
 
+// helper function to help determine the position on screen of the pathway box
 function position(num: number) {
   if (num === 0) {
     return {
@@ -22,6 +25,7 @@ function position(num: number) {
 }
 
 export default function Pathways(props: PathwayProps) {
+  // constant determining what items are shown in the dropdown
   const options = [
     { label: "Select Pathway...", value: "none" },
 
@@ -46,21 +50,28 @@ export default function Pathways(props: PathwayProps) {
     { label: "Design", value: "design" },
   ];
 
-  const [value, setValue] = useState("");
+  // useState determining what gets shown
+  const [value, setValue] = useState<String>("");
 
+  // function that runs when the pathway is changed
   const handleChange = (event: {
-    target: { value: SetStateAction<string> };
+    target: { value: SetStateAction<String> };
   }) => {
     setValue(event.target.value);
     props.setPathway(event.target.value.toString());
   };
 
   return (
-    <div>
+    <div
+      aria-label="Pathway Dropdown Menu"
+      aria-description="Dropdown Menu you can use to select which pathways to complete"
+    >
       <label>
         <select
+          aria-label="Pathway Dropdown Menu"
+          aria-description="Dropdown Menu you can use to select which pathways to complete"
           className="PathwayDropdown"
-          value={value}
+          value={String(value)}
           onChange={handleChange}
           style={position(props.num)}
         >

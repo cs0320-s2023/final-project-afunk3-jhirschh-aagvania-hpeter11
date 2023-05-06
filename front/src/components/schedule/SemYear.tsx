@@ -2,6 +2,7 @@ import { useState } from "react";
 import SemYearHeader from "./SemYearHeader";
 import ClassBox from "./ClassBox";
 
+// interface containing the React inputs to the class
 interface SemYearProps {
   num: number;
   grad_year: number;
@@ -13,6 +14,7 @@ interface SemYearProps {
   optionTable: Array<Array<String>>;
 }
 
+// helper function to help determine the position on screen of the semester box
 function position(back: number) {
   let tippy: string;
   let loosey: string;
@@ -30,6 +32,7 @@ function position(back: number) {
 }
 
 export default function SemYear(props: SemYearProps) {
+  // map dictating how the classes are presented within the semester
   let nums: Array<number> = [...Array(5).keys()];
   let numsMap: Map<String, number> = new Map(
     nums.map((n) => [n.toString(), n])

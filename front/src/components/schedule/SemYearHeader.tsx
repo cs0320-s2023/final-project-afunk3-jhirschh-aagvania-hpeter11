@@ -1,7 +1,9 @@
+// interface containing the React inputs to the class
 interface SemYearHeaderProps {
   year: number;
 }
 
+// function to determine the semester presented by the header
 function process_year(year: number) {
   if (year < 1764) {
     return "Semester";
@@ -15,7 +17,7 @@ function process_year(year: number) {
 
 export default function SemYearHeader(props: SemYearHeaderProps) {
   return (
-    <div className="SemYear" style={{ left: "0.375vw", top: "0.5vh" }}>
+    <div className="SemYearHeader" style={{ left: "0.375vw", top: "0.5vh" }}>
       {process_year(props.year)}
     </div>
   );

@@ -6,8 +6,10 @@ import ClassOption from "./components/preferences/ClassOption";
 import ClassOf from "./components/preferences/ClassOf";
 import Pathways from "./components/preferences/Pathways";
 import Search, { Class } from "./components/preferences/Search";
-import { generate } from "./components/actions/Generate";
+import { generate, Output } from "./components/actions/Generate";
 import courses from "../../back/data/courses.json";
+import Export from "./components/actions/Export";
+import Info from "./components/actions/Info";
 
 function App() {
   // Text box for graduation year controls this hook
@@ -54,10 +56,8 @@ function App() {
     setSemClasses([[], [], [], [], [], [], [], []]);
   }
 
-  let catalog: Array<Class> = courses;
-
   function handleGenerate() {
-    // add completed classes as earlier semesters to semClasses
+    // add prereqs as earlier semesters to semClasses
     let prereqs: String[][] = [];
     let curSem: String[] = [];
     for (var i = 0; i < optionTable[1].length; i++) {
@@ -67,13 +67,32 @@ function App() {
         curSem = [];
       }
     }
+    // if there is an uncompleted "semester" of prereqs, also add that
     if (curSem.length !== 0) {
       prereqs.push(curSem);
       curSem = [];
     }
+    // add the prereqs and classes into one array
     let genClasses: String[][] = prereqs.concat(semClasses);
-
-    generate(gradYear, genClasses, optionTable, pathway1, pathway2);
+    // make sure the array has no empty slots
+    for (var i = 0; i < genClasses.length; i++) {
+      genClasses[i] = genClasses[i].flat();
+    }
+    // generate the optimized schedule
+    generate(gradYear, genClasses, optionTable, pathway1, pathway2).then(
+      (response) => {
+        // if the input is incorrect or a schedule cannot be made
+        if (response.result === "Error") {
+          // TODO: fill this out with what happens for an improper result
+          console.log("uh oh");
+        } else {
+          // else, update the schedule and pathways
+          setSemClasses(response.schedule);
+          setPathway1(response.pathway1);
+          setPathway2(response.pathway2);
+        }
+      }
+    );
   }
 
   return (
@@ -104,21 +123,28 @@ function App() {
         />
       </div>
       <ClassOf setNum={setGradYear} />
-      <Pathways num={0} setPathway={setPathway1} />
-      <Pathways num={1} setPathway={setPathway2} />
+      <Pathways num={0} setPathway={setPathway1} pathway={pathway1} />
+      <Pathways num={1} setPathway={setPathway2} pathway={pathway2} />
       <Search
         class={currClass}
         setClass={setCurrClass}
         textbox={textbox}
         setTextbox={setTextbox}
       />
+
       <button className="ResetSchedButton" onClick={(e) => handleResetSched()}>
         Reset Schedule
       </button>
-      <button
-        className="GenerateButton"
-        onClick={(e) => handleGenerate()}
-      ></button>
+      <button className="GenerateButton" onClick={(e) => handleGenerate()}>
+        Generate
+      </button>
+      <Export
+        schedule={semClasses}
+        pathway1={pathway1}
+        pathway2={pathway2}
+        gradYear={gradYear}
+      />
+      <Info />
     </div>
   );
 }

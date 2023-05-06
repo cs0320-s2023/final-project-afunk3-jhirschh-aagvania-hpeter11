@@ -1,32 +1,40 @@
 import { useState } from "react";
 
+// interface containing the React inputs to the class
 interface ClassOfProps {
   setNum: (data: number) => void;
 }
 
 export default function ClassOf(props: ClassOfProps) {
+  // use state for the textbox
   const [textbox, setTextbox] = useState("");
 
+  // function that runs on submission
   function handleSubmit() {
+    // convert the input into a number
     let inputYear: number | undefined = Number(textbox);
     let roundness = (inputYear * 2) % 2;
+    // if the input is not a valid number
     if (isNaN(inputYear) || (roundness != 0 && roundness != 1)) {
       // TODO: Change how we tell users about errors
       setTextbox("Invalid Year");
-    } else if (typeof inputYear === "number") {
+    }
+    // else if the input is a number
+    else if (typeof inputYear === "number") {
       props.setNum(inputYear);
       setTextbox("");
-    } else {
+    }
+    // else (should not reach this)
+    else {
       throw new Error("Should not get here.");
     }
   }
-  // className="ClassOfBackground"
   return (
     <div style={{ left: "15vw", top: "25vh" }}>
       <input
         type="text"
-        aria-label="Class Of Input Box"
-        aria-description="Type class year in this input box"
+        aria-label="Graduation Year Input Box"
+        aria-description="Type graduation year in this input box"
         className="ClassOfBox"
         placeholder="Graduation Year"
         onChange={(e) => setTextbox(e.target.value)}
@@ -39,6 +47,8 @@ export default function ClassOf(props: ClassOfProps) {
         style={{ left: "11vw", top: "20vh" }}
       />
       <button
+        aria-label=" Graduation Year Input Button"
+        aria-description="Click this button to input the graduation year"
         className="ClassOfButton"
         onClick={handleSubmit}
         style={{ left: "31vw", top: "20vh" }}
