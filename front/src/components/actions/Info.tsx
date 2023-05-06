@@ -16,6 +16,8 @@ export default function Info(props: InfoProps) {
       {open ? (
         <div>
           <div
+            aria-label="Graduation Year Info Box"
+            aria-description="Contains information about the Graduation Year inputs"
             className="InfoBox"
             style={{
               width: "16vw",
@@ -28,6 +30,8 @@ export default function Info(props: InfoProps) {
             graduating in the Fall, put .5 at the end of your year!
           </div>
           <div
+            aria-label="Search Info Box"
+            aria-description="Contains information about the Course Search Input"
             className="InfoBox"
             style={{ width: "20vw", height: "10vh", left: "11vw", top: "30vh" }}
           >
@@ -35,6 +39,8 @@ export default function Info(props: InfoProps) {
             the dropdown menu, then select another button to place it!
           </div>
           <div
+            aria-label="Option Table Info Box"
+            aria-description="Contains information about the Take, Preqrequisites, and Avoid Boxes"
             className="InfoBox"
             style={{ width: "25vw", height: "18vh", left: "11vw", top: "63vh" }}
           >
@@ -45,6 +51,8 @@ export default function Info(props: InfoProps) {
             of the categories by clicking their respective 'clear' buttons.
           </div>
           <div
+            aria-label="Schedule Info Box"
+            aria-description="Contains information about the schedule"
             className="InfoBox"
             style={{
               width: "25vw",
@@ -61,6 +69,8 @@ export default function Info(props: InfoProps) {
             again. You can also reset the whole schedule at once.
           </div>
           <div
+            aria-label="Export Info Box"
+            aria-description="Contains information about the Export box"
             className="InfoBox"
             style={{
               width: "24vw",
@@ -75,7 +85,12 @@ export default function Info(props: InfoProps) {
           </div>
         </div>
       ) : null}
-      <button className="InfoButton" onClick={(e) => handleOpen()}>
+      <button
+        aria-label="Info Button"
+        aria-description="Button to click to open or close info boxes"
+        className="InfoButton"
+        onClick={(e) => handleOpen()}
+      >
         Info
       </button>
     </div>

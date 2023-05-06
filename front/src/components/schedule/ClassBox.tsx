@@ -58,23 +58,29 @@ export default function ClassBox(props: ClassBoxProps) {
       props.setCurrClass("");
       props.setTextbox("");
     }
-    // else, if there is no current class
-    else if (props.currClass === "") {
-      // make a new array (defensive copy), and delete the class existing in this
-      // location from that array
+    // else, if there is a current class to replace an existing class
+    else if (
+      !props.classes.find(([cat]) => cat === props.currClass.split(",")[0]) &&
+      !props.optionTable.find(
+        ([cat]) => cat === props.currClass.split(",")[0]
+      ) &&
+      checkSem()
+    ) {
+      // make a new array (defensive copy), and replace the existing class
+      // with the current class
       let newArray: Array<Array<String>> = props.classes;
-      delete newArray[props.posX][props.posY];
+      newArray[props.posX][props.posY] = props.currClass.split(",")[0];
       // setClasses with that array, and reset current class and textbox
       props.setClasses([...newArray]);
       props.setCurrClass("");
       props.setTextbox("");
     }
-    // else, if there is a current class to replace an existing class
+    // else, if there is no current class
     else {
-      // make a new array (defensive copy), and replace the existing class
-      // with the current class
+      // make a new array (defensive copy), and delete the class existing in this
+      // location from that array
       let newArray: Array<Array<String>> = props.classes;
-      newArray[props.posX][props.posY] = props.currClass.split(",")[0];
+      delete newArray[props.posX][props.posY];
       // setClasses with that array, and reset current class and textbox
       props.setClasses([...newArray]);
       props.setCurrClass("");

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 import "../styles/App.css";
 import Header from "./components/Header";
 import SemYear from "./components/schedule/SemYear";
@@ -44,6 +46,9 @@ function App() {
   // hook for the output of the search box
   const [textbox, setTextbox] = useState<string>("");
 
+  // hook for displaying the error popup
+  const [error, setError] = useState<boolean>(false);
+
   // map dictating how the schedule is presented
   let nums: Array<number> = [...Array(8).keys()];
   let numsMap: Map<String, number> = new Map(
@@ -83,8 +88,9 @@ function App() {
       (response) => {
         // if the input is incorrect or a schedule cannot be made
         if (response.result === "Error") {
+          setError(true);
           // TODO: fill this out with what happens for an improper result
-          console.log("uh oh");
+          setTimeout(() => setError(false), 2000);
         } else {
           // else, update the schedule and pathways
           setSemClasses(response.schedule);
@@ -132,10 +138,20 @@ function App() {
         setTextbox={setTextbox}
       />
 
-      <button className="ResetSchedButton" onClick={(e) => handleResetSched()}>
+      <button
+        aria-label="Reset Schedule Button"
+        aria-description="Button to reset the schedule"
+        className="ResetSchedButton"
+        onClick={(e) => handleResetSched()}
+      >
         Reset Schedule
       </button>
-      <button className="GenerateButton" onClick={(e) => handleGenerate()}>
+      <button
+        aria-label="Generate Button"
+        aria-description="Button to generate an optimized schedule"
+        className="GenerateButton"
+        onClick={(e) => handleGenerate()}
+      >
         Generate
       </button>
       <Export
@@ -145,6 +161,15 @@ function App() {
         gradYear={gradYear}
       />
       <Info />
+      {error ? (
+        <div
+          aria-label="Error Box"
+          aria-description="Pop up box when it is not possible to make a schedule from the inputted data"
+          className="ErrorBox"
+        >
+          Error: It is not possible to make a schedule given these inputs
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -19,6 +19,9 @@ export const generate = async function (
     ) {
       prefPaths.push(pathway2);
     }
+    // find the current year and month, to see which semester should be frozen
+    var now = new Date();
+    let currDate: number = now.getFullYear() + (now.getMonth() + 1) / 12;
     // set up schedule to be inputted to the API
     let courses: Course[] = [];
     for (var i = 0; i < semClasses.length; i++) {
@@ -29,6 +32,7 @@ export const generate = async function (
           season: (year * 2) % 2 === 0 ? "Spring" : "Fall",
         },
         courses: semClasses[i],
+        frozen: currDate >= year + 1,
       };
       courses.push(coursei);
     }
@@ -94,6 +98,7 @@ export const generate = async function (
         }
         // if the output from the API is improper, return an error message
         else {
+          console.log(data);
           resolve({
             result: "Error",
             schedule: [],
@@ -117,6 +122,7 @@ export interface Output {
 interface Course {
   semester: SemesterInput;
   courses: String[];
+  frozen: boolean;
 }
 
 interface SemesterInput {

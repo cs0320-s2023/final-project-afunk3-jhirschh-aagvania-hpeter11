@@ -367,3 +367,22 @@
 .GenerateButton:hover {
   background: #9bddff;
 }
+
+.ErrorBox {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 30vw;
+  height: 20vh;
+  left: 30vw;
+  top: 35vh;
+
+  text-align: center;
+  color: #fc2403;
+  vertical-align: middle;
+  line-height: 6vh;
+  font-size: 3vw;
+
+  background: #d9d9d9;
+  border: 0.1vw solid #000000;
+}

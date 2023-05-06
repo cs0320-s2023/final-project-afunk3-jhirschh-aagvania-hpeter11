@@ -29,25 +29,23 @@ export default function Pathways(props: PathwayProps) {
   const options = [
     { label: "Select Pathway...", value: "none" },
 
-    { label: "Systems", value: "systems" },
+    { label: "Systems", value: "Systems" },
 
-    { label: "Software Principles", value: "software_principles" },
+    { label: "Software Principles", value: "Software Principles" },
 
-    { label: "Data", value: "data" },
+    { label: "Data", value: "Data" },
 
-    { label: "AI/ML", value: "ai/ml" },
+    { label: "AI/ML", value: "Artificial Intelligence/Machine Learning" },
 
-    { label: "Theory", value: "theory" },
+    { label: "Theory", value: "Theory" },
 
-    { label: "Security", value: "security" },
+    { label: "Security", value: "Security" },
 
-    { label: "Visual Computing", value: "visual_computing" },
+    { label: "Visual Computing", value: "Visual Computing" },
 
-    { label: "Computer Architecture", value: "comp_arch" },
+    { label: "Computational Biology", value: "Computational Biology" },
 
-    { label: "Computational Biology", value: "comp_bio" },
-
-    { label: "Design", value: "design" },
+    { label: "Design", value: "Design" },
   ];
 
   // useState determining what gets shown
