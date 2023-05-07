@@ -1,6 +1,6 @@
 package edu.brown.cs.student;
-
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.ortools.Loader;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
@@ -17,7 +17,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import spark.Spark;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
@@ -30,42 +33,10 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class IntegrationTest {
 
-    private static List<Course> courses;
-    private static List<Pathway> pathways;
-    private static List<IntermediateGroup> intermediateGroups;
-    private static List<List<String>> equivalenceGroups;
-
     @BeforeAll
     public static void setup_before_everything() throws IOException {
 
-        // This can be performed only once per server instantiation.
-        Loader.loadNativeLibraries();
-
-        // All courses available.
-        Moshi moshi = new Moshi.Builder().build();
-        JsonAdapter<List<Course>> courseSerializer = moshi.adapter(
-                Types.newParameterizedType(List.class, Course.class));
-        courses = courseSerializer.fromJson(Files.readString(Paths.get("data/courses.json")));
-
-        // All pathways available.
-        JsonAdapter<List<Pathway>> pathwaySerializer = moshi.adapter(
-                Types.newParameterizedType(List.class, Pathway.class));
-        pathways = pathwaySerializer.fromJson(Files.readString(Paths.get("data/pathways.json")));
-
-        // All intermediate groups available.
-        JsonAdapter<List<IntermediateGroup>> intermediateGroupSerializer = moshi.adapter(
-                Types.newParameterizedType(List.class, IntermediateGroup.class));
-        intermediateGroups = intermediateGroupSerializer.fromJson(
-                Files.readString(Paths.get("data/intermediateGroups.json")));
-
-        // Courses that cannot be taken together.
-        JsonAdapter<List<List<String>>> equivalenceGroupSerializer = moshi.adapter(
-                Types.newParameterizedType(List.class,
-                        Types.newParameterizedType(List.class, String.class)));
-        equivalenceGroups = equivalenceGroupSerializer.fromJson(
-                Files.readString(Paths.get("data/equivalenceGroups.json")));
-
-        Spark.port(3232);
+        Spark.port(0);
         Logger.getLogger("").setLevel(Level.WARNING); // empty name = root logger
     }
 
@@ -90,12 +61,24 @@ public class IntegrationTest {
 
     static private HttpURLConnection tryRequest(String apiCall) throws IOException {
         // Configure the connection (but don't actually send the request yet)
-        URL requestURL = new URL("http://localhost:"+ Spark.port()+"/schedule?" + apiCall);
+        URL requestURL = new URL("http://localhost:" + Spark.port() + "/schedule");
         HttpURLConnection clientConnection = (HttpURLConnection) requestURL.openConnection();
 
-        // The default method is "GET", which is what we're using here.
-        // If we were using "POST", we'd need to say so.
-        //clientConnection.setRequestMethod("GET");
+        //Specify request type as POST
+        clientConnection.setRequestMethod("POST");
+
+        //Specify request body as Json
+        clientConnection.setRequestProperty("Content-Type", "application/json");
+
+        //enable output for POST request
+        clientConnection.setDoOutput(true);
+
+
+        OutputStreamWriter writer = new OutputStreamWriter(clientConnection.getOutputStream());
+
+        //changes input to bytes
+        writer.write(apiCall);
+        writer.flush();
 
         clientConnection.connect();
         return clientConnection;
@@ -106,9 +89,26 @@ public class IntegrationTest {
         return moshi.adapter(customClass).fromJson(new okio.Buffer().readFrom(clientConnection.getInputStream()));
     }
 
+    public String ReadJsonAsString(String filename) throws IOException {
+        String jsonString = new String(Files.readAllBytes(Paths.get(filename)));
+
+        //Using Jackson library to implement stringify
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        //Bundles json into generic container of elements
+        JsonNode jsonNode = objectMapper.readTree(jsonString);
+
+        //returns string version
+        String json = objectMapper.writeValueAsString(jsonNode);
+
+        System.out.println(json);
+        return json;
+        }
+
     @Test
     public void testReturnsResponse() throws IOException {
-        HttpURLConnection clientConnection = tryRequest("test");
+        //HttpURLConnection clientConnection = tryRequest(ReadJsonAsString("src/test/java/edu/brown/cs/student/mockJSON/MockFailure.json"));
+        HttpURLConnection clientConnection = tryRequest(ReadJsonAsString("/Users/scottpetersen/Desktop/cs32/final-project-afunk3-jhirschh-aagvania-hpeter11/back/src/test/java/edu/brown/cs/student/mockJSON/MockFailure.json"));
         // Get an OK response (the *connection* worked, the *API* provides an error response)
         assertEquals(200, clientConnection.getResponseCode());
 
