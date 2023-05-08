@@ -79,8 +79,9 @@ export default function Export(props: ExportProps) {
     <button
       aria-label="Export Button"
       aria-description="Click this button to export the class schedule as a CSV"
-      className="ExportButton"
+      className="ActionButton"
       onClick={(e) => handleClick()}
+      style={{ left: "73.375vw" }}
     >
       Export
     </button>

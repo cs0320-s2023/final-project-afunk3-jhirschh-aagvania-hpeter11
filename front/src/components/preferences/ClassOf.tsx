@@ -8,6 +8,8 @@ interface ClassOfProps {
 export default function ClassOf(props: ClassOfProps) {
   // use state for the textbox
   const [textbox, setTextbox] = useState("");
+  // use state for the placeholder text
+  const [placeholder, setPlaceholder] = useState("Graduation Year");
 
   // function that runs on submission
   function handleSubmit() {
@@ -17,7 +19,9 @@ export default function ClassOf(props: ClassOfProps) {
     // if the input is not a valid number
     if (isNaN(inputYear) || (roundness != 0 && roundness != 1)) {
       // TODO: Change how we tell users about errors
-      setTextbox("Invalid Year");
+      setTextbox("");
+      setPlaceholder("Invalid Year");
+      setTimeout(() => setPlaceholder("Graduation Year"), 2000);
     }
     // else if the input is a number
     else if (typeof inputYear === "number") {
@@ -36,7 +40,7 @@ export default function ClassOf(props: ClassOfProps) {
         aria-label="Graduation Year Input Box"
         aria-description="Type graduation year in this input box"
         className="ClassOfBox"
-        placeholder="Graduation Year"
+        placeholder={placeholder}
         onChange={(e) => setTextbox(e.target.value)}
         value={textbox}
         onKeyUp={(e) => {

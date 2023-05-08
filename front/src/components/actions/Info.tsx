@@ -88,8 +88,9 @@ export default function Info(props: InfoProps) {
       <button
         aria-label="Info Button"
         aria-description="Button to click to open or close info boxes"
-        className="InfoButton"
+        className="ActionButton"
         onClick={(e) => handleOpen()}
+        style={{ left: "49.375vw" }}
       >
         Info
       </button>

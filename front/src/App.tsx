@@ -89,7 +89,6 @@ function App() {
         // if the input is incorrect or a schedule cannot be made
         if (response.result === "Error") {
           setError(true);
-          // TODO: fill this out with what happens for an improper result
           setTimeout(() => setError(false), 2000);
         } else {
           // else, update the schedule and pathways
@@ -141,16 +140,18 @@ function App() {
       <button
         aria-label="Reset Schedule Button"
         aria-description="Button to reset the schedule"
-        className="ResetSchedButton"
+        className="ActionButton"
         onClick={(e) => handleResetSched()}
+        style={{ left: "61.375vw" }}
       >
         Reset Schedule
       </button>
       <button
         aria-label="Generate Button"
         aria-description="Button to generate an optimized schedule"
-        className="GenerateButton"
+        className="ActionButton"
         onClick={(e) => handleGenerate()}
+        style={{ left: "85.375vw" }}
       >
         Generate
       </button>

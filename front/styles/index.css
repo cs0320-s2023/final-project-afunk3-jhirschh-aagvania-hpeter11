@@ -85,12 +85,26 @@
   line-height: 5vh;
   font-size: 1.5vw;
 
+  transition: all 250ms;
+
   background: #d9d9d9;
   border: 2px solid #000000;
 }
 
+.ClassBox:hover,
+.ClassBox:focus {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
 .ClassBox:hover {
-  background: #9bddff;
+  background-color: #ede2e2;
+  transform: translateY(-0.2vw);
+}
+
+.ClassBox:active {
+  background-color: #ede2e2;
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  transform: translateY(0);
 }
 
 .ClassOptionBackground {
@@ -123,7 +137,7 @@
 }
 
 .OptionButton:hover {
-  background: #9bddff;
+  background-color: #ede2e2;
 }
 
 .OptionList {
@@ -131,7 +145,7 @@
 
   position: absolute;
   width: 9.97vw;
-  height: 34.5vh;
+  height: 29.5vh;
   overflow: scroll;
 
   text-align: center;
@@ -215,7 +229,7 @@
   box-sizing: border-box;
 
   position: absolute;
-  width: 20vw;
+  width: 25.5vw;
   height: 5vh;
 
   text-align: center;
@@ -266,9 +280,6 @@
   background: #d9d9d9;
 }
 
-.InfoButton:hover {
-  background: #9bddff;
-}
 .InfoBox {
   box-sizing: border-box;
   padding: 0.5vw;
@@ -284,88 +295,51 @@
   border: 0.1vw solid #000000;
 }
 
-.InfoButton {
+/* Action Buttons, specify left alignment */
+.ActionButton {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #d9d9d9;
+  border: 0.1vw solid #000000;
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
   box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-flex;
+
+  font-size: 1.5vw;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
 
   position: absolute;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+
   width: 12vw;
   height: 5vh;
-  left: 49.375vw;
   top: 15vh;
-
-  text-align: center;
-  vertical-align: middle;
-  line-height: 5vh;
-  font-size: 1.5vw;
-
-  background: #d9d9d9;
-  border: 0.1vw solid #000000;
 }
 
-.ResetSchedButton {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 12vw;
-  height: 5vh;
-  left: 61.375vw;
-  top: 15vh;
-
-  text-align: center;
-  vertical-align: middle;
-  line-height: 5vh;
-  font-size: 1.5vw;
-
-  background: #d9d9d9;
-  border: 0.1vw solid #000000;
+.ActionButton:hover,
+.ActionButton:focus {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
 
-.ResetSchedButton:hover {
-  background: #9bddff;
+.ActionButton:hover {
+  background-color: #ede2e2;
+  transform: translateY(-0.2vw);
 }
 
-.ExportButton {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 12vw;
-  height: 5vh;
-  left: 73.375vw;
-  top: 15vh;
-
-  text-align: center;
-  vertical-align: middle;
-  line-height: 5vh;
-  font-size: 1.5vw;
-
-  background: #d9d9d9;
-  border: 0.1vw solid #000000;
-}
-
-.ExportButton:hover {
-  background: #9bddff;
-}
-
-.GenerateButton {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 12vw;
-  height: 5vh;
-  left: 85.375vw;
-  top: 15vh;
-
-  text-align: center;
-  vertical-align: middle;
-  line-height: 5vh;
-  font-size: 1.5vw;
-
-  background: #d9d9d9;
-  border: 0.1vw solid #000000;
-}
-
-.GenerateButton:hover {
-  background: #9bddff;
+.ActionButton:active {
+  background-color: #ede2e2;
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  transform: translateY(0);
 }
 
 .ErrorBox {
@@ -374,11 +348,11 @@
   position: absolute;
   width: 30vw;
   height: 20vh;
-  left: 30vw;
-  top: 35vh;
+  left: 35vw;
+  top: 40vh;
 
   text-align: center;
-  color: #fc2403;
+  color: #a51c30;
   vertical-align: middle;
   line-height: 6vh;
   font-size: 3vw;
