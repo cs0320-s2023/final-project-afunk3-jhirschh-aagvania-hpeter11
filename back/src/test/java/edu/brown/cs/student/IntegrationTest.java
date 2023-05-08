@@ -3,6 +3,8 @@ package edu.brown.cs.student;
 import static org.testng.AssertJUnit.assertEquals;
 import static spark.Spark.after;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.ortools.Loader;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
@@ -116,12 +118,27 @@ public class IntegrationTest {
     Spark.awaitInitialization(); // don't continue until the server is listening
   }
 
-  @After
-  public void teardown() {
-    // Gracefully stop Spark listening on both endpoints
-    Spark.unmap("/schedule");
+//  @After
+//  public void teardown() {
+//    // Gracefully stop Spark listening on both endpoints
+//    Spark.unmap("/schedule");
+//
+//    Spark.awaitStop(); // don't proceed until the server is stopped
+//  }
 
-    Spark.awaitStop(); // don't proceed until the server is stopped
+  public String ReadJsonAsString(String filename) throws IOException {
+    String jsonString = new String(Files.readAllBytes(Paths.get(filename)));
+
+    //Using Jackson library to implement stringify
+    ObjectMapper objectMapper = new ObjectMapper();
+
+    //Bundles json into generic container of elements
+    JsonNode jsonNode = objectMapper.readTree(jsonString);
+
+    //returns string version
+    String json = objectMapper.writeValueAsString(jsonNode);
+
+    return json;
   }
 
   @Test
@@ -138,5 +155,114 @@ public class IntegrationTest {
     clientConnection.disconnect();
   }
 
+  @Test
+  public void testDoesParse() throws IOException {
+    HttpURLConnection clientConnection = tryRequest(ReadJsonAsString("src/test/java/edu/brown/cs/student/mockJSON/MockSuccess.json"));
+    assertEquals(200, clientConnection.getResponseCode());
 
+    Moshi moshi = new Moshi.Builder().build();
+    ScheduleFailureResponse response = getResponse(clientConnection, ScheduleFailureResponse.class);
+
+    assertEquals("success", response.result());
+
+    clientConnection.disconnect();
+  }
+
+  @Test
+  public void testDoesNotParse() throws IOException {
+    HttpURLConnection clientConnection = tryRequest(ReadJsonAsString("src/test/java/edu/brown/cs/student/mockJSON/MockPartialFailure.json"));
+    assertEquals(200, clientConnection.getResponseCode());
+
+    Moshi moshi = new Moshi.Builder().build();
+    ScheduleFailureResponse response = getResponse(clientConnection, ScheduleFailureResponse.class);
+
+    assertEquals("error", response.result());
+    assertEquals("Partial assignment is empty.", response.message());
+
+    clientConnection.disconnect();
+  }
+
+  @Test
+  public void testCourseEmpty() throws IOException {
+    HttpURLConnection clientConnection = tryRequest(ReadJsonAsString("src/test/java/edu/brown/cs/student/mockJSON/MockCourses.json"));
+    assertEquals(200, clientConnection.getResponseCode());
+
+    Moshi moshi = new Moshi.Builder().build();
+    ScheduleFailureResponse response = getResponse(clientConnection, ScheduleFailureResponse.class);
+
+    assertEquals("error", response.result());
+    assertEquals("Missing courses field of some assignment.", response.message());
+
+    clientConnection.disconnect();
+  }
+
+  @Test
+  public void testFrozenEmpty() throws IOException {
+    HttpURLConnection clientConnection = tryRequest(ReadJsonAsString("src/test/java/edu/brown/cs/student/mockJSON/MockFrozen.json"));
+    assertEquals(200, clientConnection.getResponseCode());
+
+    Moshi moshi = new Moshi.Builder().build();
+    ScheduleFailureResponse response = getResponse(clientConnection, ScheduleFailureResponse.class);
+
+    assertEquals("error", response.result());
+    assertEquals("Missing frozen field of some assignment.", response.message());
+
+    clientConnection.disconnect();
+  }
+
+  @Test
+  public void testSeasonEmpty() throws IOException {
+    HttpURLConnection clientConnection = tryRequest(ReadJsonAsString("src/test/java/edu/brown/cs/student/mockJSON/MockSeason.json"));
+    assertEquals(200, clientConnection.getResponseCode());
+
+    Moshi moshi = new Moshi.Builder().build();
+    ScheduleFailureResponse response = getResponse(clientConnection, ScheduleFailureResponse.class);
+
+    assertEquals("error", response.result());
+    assertEquals("Missing season field of some assignment.", response.message());
+
+    clientConnection.disconnect();
+  }
+
+  @Test
+  public void testSemesterEmpty() throws IOException {
+    HttpURLConnection clientConnection = tryRequest(ReadJsonAsString("src/test/java/edu/brown/cs/student/mockJSON/MockSemester.json"));
+    assertEquals(200, clientConnection.getResponseCode());
+
+    Moshi moshi = new Moshi.Builder().build();
+    ScheduleFailureResponse response = getResponse(clientConnection, ScheduleFailureResponse.class);
+
+    assertEquals("error", response.result());
+    assertEquals("Missing semester field of some assignment.", response.message());
+
+    clientConnection.disconnect();
+  }
+
+  @Test
+  public void testYearEmpty() throws IOException {
+    HttpURLConnection clientConnection = tryRequest(ReadJsonAsString("src/test/java/edu/brown/cs/student/mockJSON/MockYear.json"));
+    assertEquals(200, clientConnection.getResponseCode());
+
+    Moshi moshi = new Moshi.Builder().build();
+    ScheduleFailureResponse response = getResponse(clientConnection, ScheduleFailureResponse.class);
+
+    assertEquals("error", response.result());
+    assertEquals("Missing year field of some assignment.", response.message());
+
+    clientConnection.disconnect();
+  }
+
+  @Test
+  public void testFakeCourse() throws IOException {
+    HttpURLConnection clientConnection = tryRequest(ReadJsonAsString("src/test/java/edu/brown/cs/student/mockJSON/MockFakeCourse.json"));
+    assertEquals(200, clientConnection.getResponseCode());
+
+    Moshi moshi = new Moshi.Builder().build();
+    ScheduleFailureResponse response = getResponse(clientConnection, ScheduleFailureResponse.class);
+
+    assertEquals("error", response.result());
+    assertEquals("Unknown course provided to the solver.", response.message());
+
+    clientConnection.disconnect();
+  }
 }

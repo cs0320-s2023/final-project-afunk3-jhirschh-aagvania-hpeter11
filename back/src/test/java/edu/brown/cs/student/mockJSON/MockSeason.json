@@ -1,0 +1,70 @@
+{
+  "preferred": [
+    "CSCI0170"
+  ],
+  "undesirable": [
+    "CSCI0020"
+  ],
+  "preferredPathways": [
+    "Systems"
+  ],
+  "partialAssignment": [
+    {
+      "semester": {
+        "year": 2024
+      },
+      "courses": [
+        "CSCI0220"
+      ],
+      "frozen": false
+    },
+    {
+      "semester": {
+        "year": 2024,
+        "season": "Fall"
+      },
+      "courses": [],
+      "frozen": false
+    },
+    {
+      "semester": {
+        "year": 2025,
+        "season": "Spring"
+      },
+      "courses": [],
+      "frozen": false
+    },
+    {
+      "semester": {
+        "year": 2025,
+        "season": "Fall"
+      },
+      "courses": [],
+      "frozen": false
+    },
+    {
+      "semester": {
+        "year": 2026,
+        "season": "Spring"
+      },
+      "courses": [],
+      "frozen": false
+    },
+    {
+      "semester": {
+        "year": 2026,
+        "season": "Fall"
+      },
+      "courses": [],
+      "frozen": false
+    },
+    {
+      "semester": {
+        "year": 2027,
+        "season": "Spring"
+      },
+      "courses": [],
+      "frozen": false
+    }
+  ]
+}
