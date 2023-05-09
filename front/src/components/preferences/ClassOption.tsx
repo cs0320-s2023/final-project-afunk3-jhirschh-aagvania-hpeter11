@@ -21,7 +21,7 @@ function makeTable(tableData: String[]): React.ReactElement {
   }
   return (
     <table className="ClassOptionTable">
-      <tbody className="ClassOptionRow">{formTable(newArr)}</tbody>
+      <tbody className="ClassOptionBody">{formTable(newArr)}</tbody>
     </table>
   );
 }
@@ -40,7 +40,7 @@ function formTable(tableData: String[][]): React.ReactElement[] {
 function formRow(rowData: String[]): React.ReactElement[] {
   let row: React.ReactElement[] = [];
   for (var i = 0; i < rowData.length; i++) {
-    row.push(<td className="ClassOptionRow">{rowData[i]}</td>);
+    row.push(<td className="ClassOptionInput">{rowData[i]}</td>);
   }
   return row;
 }
@@ -137,7 +137,10 @@ export default function ClassOption(props: ClassOptionProps) {
   }
   // TODO: finish handleSubmit and figure out how to present the classes properly
   return (
-    <div>
+    <div
+      aria-label="Option Table"
+      aria-description="Table containing Avoid, Prerequisites, and Take categories"
+    >
       <button
         aria-label="Avoid Button"
         aria-description="Click this button after searching to signify that you want to avoid a class"
@@ -156,7 +159,7 @@ export default function ClassOption(props: ClassOptionProps) {
         {makeTable(avoidTable)}
       </div>
       <button
-        aria-label="Clear Button"
+        aria-label="Avoid Clear Button"
         aria-description="Click this button to clear the avoid table"
         className="OptionButton"
         style={{ left: "0vw", top: "34.5vh" }}
@@ -183,7 +186,7 @@ export default function ClassOption(props: ClassOptionProps) {
         {makeTable(completedTable)}
       </div>
       <button
-        aria-label="Clear Button"
+        aria-label="Prerequisites Clear Button"
         aria-description="Click this button to clear the prerequisites table"
         className="OptionButton"
         style={{ left: "9.9vw", top: "34.5vh" }}
@@ -210,7 +213,7 @@ export default function ClassOption(props: ClassOptionProps) {
         {makeTable(takeTable)}
       </div>
       <button
-        aria-label="Clear Button"
+        aria-label="Take Clear Button"
         aria-description="Click this button to clear the take table"
         className="OptionButton"
         style={{ left: "19.8vw", top: "34.5vh" }}

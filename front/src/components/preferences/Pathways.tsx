@@ -51,6 +51,12 @@ export default function Pathways(props: PathwayProps) {
   // useState determining what gets shown
   const [value, setValue] = useState<String>("");
 
+  // useState determining aria label
+  const outerAriaLabel =
+    "Pathway Dropdown Menu Background " + props.num.toString();
+
+  const innerAriaLabel = "Pathway Dropdown Menu " + props.num.toString();
+
   // function that runs when the pathway is changed
   const handleChange = (event: {
     target: { value: SetStateAction<String> };
@@ -61,12 +67,12 @@ export default function Pathways(props: PathwayProps) {
 
   return (
     <div
-      aria-label="Pathway Dropdown Menu"
+      aria-label={outerAriaLabel}
       aria-description="Dropdown Menu you can use to select which pathways to complete"
     >
       <label>
         <select
-          aria-label="Pathway Dropdown Menu"
+          aria-label={innerAriaLabel}
           aria-description="Dropdown Menu you can use to select which pathways to complete"
           className="PathwayDropdown"
           value={String(value)}

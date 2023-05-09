@@ -26,6 +26,9 @@ export default function ClassBox(props: ClassBoxProps) {
   // variable representing the class in the overall schedule
   let currentElt = props.classes[props.posX][props.posY];
 
+  const ariaLabel =
+    "Class Box " + props.posX.toString() + props.posY.toString();
+
   // helper function that whcks to see if the input class is offered in the same
   // semester as this slot is
   function checkSem(): boolean {
@@ -90,6 +93,8 @@ export default function ClassBox(props: ClassBoxProps) {
 
   return (
     <button
+      aria-label={ariaLabel}
+      aria-description="button representing a class"
       className="ClassBox"
       style={position(props.posY + 1)}
       onClick={handleClick}

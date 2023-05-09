@@ -25,8 +25,14 @@ export default function ClassOf(props: ClassOfProps) {
     }
     // else if the input is a number
     else if (typeof inputYear === "number") {
-      props.setNum(inputYear);
-      setTextbox("");
+      if (inputYear < 1764) {
+        setTextbox("");
+        setPlaceholder("Invalid Year");
+        setTimeout(() => setPlaceholder("Graduation Year"), 2000);
+      } else {
+        props.setNum(inputYear);
+        setTextbox("");
+      }
     }
     // else (should not reach this)
     else {
@@ -34,7 +40,11 @@ export default function ClassOf(props: ClassOfProps) {
     }
   }
   return (
-    <div style={{ left: "15vw", top: "25vh" }}>
+    <div
+      aria-label="Graduation Year Input Box Background"
+      aria-description="Type graduation year in this input box"
+      style={{ left: "15vw", top: "25vh" }}
+    >
       <input
         type="text"
         aria-label="Graduation Year Input Box"

@@ -80,6 +80,8 @@
   width: 10vw;
   height: 5vh;
 
+  cursor: pointer;
+
   text-align: center;
   vertical-align: middle;
   line-height: 5vh;
@@ -126,6 +128,8 @@
   position: absolute;
   width: 9.97vw;
   height: 5vh;
+
+  cursor: pointer;
 
   text-align: center;
   vertical-align: middle;
@@ -180,6 +184,8 @@
   width: 5.5vw;
   height: 5vh;
 
+  cursor: pointer;
+
   text-align: center;
   vertical-align: middle;
   line-height: 5vh;
@@ -190,7 +196,7 @@
 }
 
 .ClassOfButton:hover {
-  background: #9bddff;
+  background: #ede2e2;
 }
 
 .PathwayDropdown {
@@ -280,6 +286,14 @@
   background: #d9d9d9;
 }
 
+.ClassOptionBody {
+  background: #d9d9d9;
+}
+
+.ClassOptionInput {
+  background: #d9d9d9;
+}
+
 .InfoBox {
   box-sizing: border-box;
   padding: 0.5vw;
@@ -290,6 +304,8 @@
   vertical-align: middle;
   line-height: 2.5vh;
   font-size: 1vw;
+
+  border-radius: 0.25rem;
 
   background: #d9d9d9;
   border: 0.1vw solid #000000;
@@ -350,6 +366,8 @@
   height: 20vh;
   left: 35vw;
   top: 40vh;
+
+  border-radius: 0.25rem;
 
   text-align: center;
   color: #a51c30;

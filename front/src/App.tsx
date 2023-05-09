@@ -103,7 +103,11 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="ScheduleBackground">
+      <div
+        aria-label="Schedule Background"
+        aria-description="Background for the class schedule"
+        className="ScheduleBackground"
+      >
         {numsMapArr.map(({ key, value }) => (
           <SemYear
             num={value}

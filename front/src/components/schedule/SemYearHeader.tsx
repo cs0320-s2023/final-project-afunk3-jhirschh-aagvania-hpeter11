@@ -16,8 +16,14 @@ function process_year(year: number) {
 }
 
 export default function SemYearHeader(props: SemYearHeaderProps) {
+  const ariaLabel = "Semester Header " + props.year.toString();
   return (
-    <div className="SemYearHeader" style={{ left: "0.375vw", top: "0.5vh" }}>
+    <div
+      aria-label={ariaLabel}
+      aria-description="Semester Header"
+      className="SemYearHeader"
+      style={{ left: "0.375vw", top: "0.5vh" }}
+    >
       {process_year(props.year)}
     </div>
   );

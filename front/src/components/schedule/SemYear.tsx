@@ -39,8 +39,15 @@ export default function SemYear(props: SemYearProps) {
   );
   let numsMapArr = Array.from(numsMap, ([key, value]) => ({ key, value }));
 
+  const ariaLabel = "Semester Background " + props.num.toString();
+
   return (
-    <div className="SemBackground" style={position(props.num)}>
+    <div
+      aria-label={ariaLabel}
+      aria-description="Background for an individual semester of classes"
+      className="SemBackground"
+      style={position(props.num)}
+    >
       <SemYearHeader year={props.grad_year + 0.5 * (props.num - 7)} />
       {numsMapArr.map(({ key, value }) => (
         <ClassBox

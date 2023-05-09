@@ -1,5 +1,13 @@
 function Header() {
-  return <div className="CSConcentrationManager">CS Concentration Manager</div>;
+  return (
+    <div
+      aria-label="Header"
+      aria-description="Header for the website"
+      className="CSConcentrationManager"
+    >
+      CS Concentration Manager
+    </div>
+  );
 }
 
 export default Header;

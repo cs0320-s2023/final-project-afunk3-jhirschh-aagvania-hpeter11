@@ -72,7 +72,7 @@ export default function Search(props: ClassOfProps) {
 
   return (
     <div
-      aria-label="Search Box"
+      aria-label="Search Box Background"
       aria-description="Search for classes in this input box"
       style={{ left: "15vw", top: "25vh" }}
     >
