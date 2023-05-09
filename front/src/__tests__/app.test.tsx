@@ -70,19 +70,6 @@ test("change class year", async () => {
   const SemHeader2 = screen.getByLabelText("Semester Header 2027.5");
   expect(await SemHeader2).toBeInTheDocument();
   expect(await screen.findByText("Spring 2029")).toBeInTheDocument();
-
-  // const VerboseLine1 = screen.getByLabelText("verbose first line");
-  // expect(await VerboseLine1).toBeInTheDocument();
-  // const VerboseLine2 = screen.getByLabelText("verbose second line");
-  // expect(await VerboseLine2).toBeInTheDocument();
-
-  // await user.type(InputBox, "mode");
-  // await user.click(Button);
-
-  // const ModeCalls = screen.getAllByLabelText("mode");
-  // expect(ModeCalls.length).toBe(2);
-  // expect(await ModeCalls[1]).toBeInTheDocument();
-  // expect(await screen.findByText("mode switched to brief")).toBeInTheDocument();
 });
 
 // test("can search and select option table", async () => {
