@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * Wrapper around CP-solver to generate concentration schedules.
@@ -472,7 +473,9 @@ public final class ConcentrationSolver {
     // Create a solver.
     CpSolver solver = new CpSolver();
     // Randomize search.
+    Random random = new Random();
     solver.getParameters().setRandomizeSearch(true);
+    solver.getParameters().setRandomSeed(random.nextInt());
     // And solve.
     CpSolverStatus status = solver.solve(this.model);
 
