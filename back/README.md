@@ -49,49 +49,56 @@ solver would try to fit the requirements into however few semesters required.
       },
       "courses": [
         "CSCI0220"
-      ]
+      ],
+      "frozen": false
     },
     {
       "semester": {
         "year": 2024,
         "season": "Fall"
       },
-      "courses": []
+      "courses": [],
+      "frozen": false
     },
     {
       "semester": {
         "year": 2025,
         "season": "Spring"
       },
-      "courses": []
+      "courses": [],
+      "frozen": false
     },
     {
       "semester": {
         "year": 2025,
         "season": "Fall"
       },
-      "courses": []
+      "courses": [],
+      "frozen": false
     },
     {
       "semester": {
         "year": 2026,
         "season": "Spring"
       },
-      "courses": []
+      "courses": [],
+      "frozen": false
     },
     {
       "semester": {
         "year": 2026,
         "season": "Fall"
       },
-      "courses": []
+      "courses": [],
+      "frozen": false
     },
     {
       "semester": {
         "year": 2027,
         "season": "Spring"
       },
-      "courses": []
+      "courses": [],
+      "frozen": false
     }
   ]
 }
@@ -113,7 +120,8 @@ solver would try to fit the requirements into however few semesters required.
         "CSCI1040",
         "MATH0540",
         "APMA1655"
-      ]
+      ],
+      "frozen": false
     },
     {
       "semester": {
@@ -125,7 +133,8 @@ solver would try to fit the requirements into however few semesters required.
         "CSCI1460",
         "MATH0520",
         "APMA0360"
-      ]
+      ],
+      "frozen": false
     },
     {
       "semester": {
@@ -137,7 +146,8 @@ solver would try to fit the requirements into however few semesters required.
         "CSCI0200",
         "CSCI1440",
         "CSCI1951-T"
-      ]
+      ],
+      "frozen": false
     },
     {
       "semester": {
@@ -149,7 +159,8 @@ solver would try to fit the requirements into however few semesters required.
         "CSCI1230",
         "CSCI1270",
         "CSCI1710"
-      ]
+      ],
+      "frozen": false
     },
     {
       "semester": {
@@ -161,7 +172,8 @@ solver would try to fit the requirements into however few semesters required.
         "CSCI1430",
         "CSCI1950-U",
         "APMA0350"
-      ]
+      ],
+      "frozen": false
     },
     {
       "semester": {
@@ -173,7 +185,8 @@ solver would try to fit the requirements into however few semesters required.
         "CSCI1410",
         "CSCI1810",
         "MATH0350"
-      ]
+      ],
+      "frozen": false
     },
     {
       "semester": {
@@ -185,7 +198,8 @@ solver would try to fit the requirements into however few semesters required.
         "CSCI1420",
         "CSCI1570",
         "CSCI1951-I"
-      ]
+      ],
+      "frozen": false
     }
   ],
   "pathways": {

@@ -7,6 +7,7 @@ import java.util.List;
  *
  * @param semester semester object.
  * @param courses  list of course codes.
+ * @param frozen if the solver should not amend the semester.
  */
 public record Assignment(Semester semester, List<String> courses, Boolean frozen) {
 
