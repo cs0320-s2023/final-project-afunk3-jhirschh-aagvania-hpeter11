@@ -47,6 +47,11 @@
       <artifactId>ortools-java</artifactId>
       <version>9.6.2534</version>
     </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.14.2</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
