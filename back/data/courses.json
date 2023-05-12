@@ -1,15 +1,5 @@
 [
   {
-    "courseCode": "CSCI0020",
-    "prerequisites": [],
-    "season": "Fall"
-  },
-  {
-    "courseCode": "CSCI0100",
-    "prerequisites": [],
-    "season": "Both"
-  },
-  {
     "courseCode": "CSCI0111",
     "prerequisites": [],
     "season": "Both"
