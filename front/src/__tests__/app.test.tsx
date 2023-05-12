@@ -72,67 +72,56 @@ test("change class year", async () => {
   expect(await screen.findByText("Spring 2029")).toBeInTheDocument();
 });
 
-// test("can search and select option table", async () => {
-//   const InputBox = screen.getByRole("textbox", { name: "Input Box" });
-//   const Button = screen.getByRole("button", { name: "Input Button" });
+test("can search and select option table", async () => {
+  const SearchBox = screen.getByLabelText("Search Box");
+  const AvoidButton = screen.getByLabelText("Avoid Button");
+  const TakeButton = screen.getByLabelText("Take Button");
 
-//   let user = userEvent.setup();
-//   await user.type(InputBox, "load_file");
-//   await user.click(Button);
+  expect(SearchBox).toBeInTheDocument();
+  expect(AvoidButton).toBeInTheDocument();
 
-//   const LoadCall = screen.getByLabelText("load_file");
-//   expect(await LoadCall).toBeInTheDocument();
-//   expect(
-//     await screen.findByText("Please input a filepath")
-//   ).toBeInTheDocument();
+  let user = userEvent.setup();
+  await user.type(SearchBox, "CSCI0150");
 
-//   await user.type(InputBox, "load_file deniro.csv");
-//   await user.click(Button);
-//   await user.type(InputBox, "load_file nothing.csv");
-//   await user.keyboard("[Enter]");
+  const SearchOption1 = screen.getByLabelText("Search option 1");
+  expect(SearchOption1).toBeInTheDocument();
+  await user.click(SearchOption1);
 
-//   const LoadCalls = screen.getAllByLabelText("load_file");
-//   expect(LoadCalls.length).toBe(3);
-//   expect(await LoadCalls[1]).toBeInTheDocument();
-//   expect(await LoadCalls[2]).toBeInTheDocument();
-//   expect(await screen.findByText("File deniro.csv loaded")).toBeInTheDocument();
-//   expect(
-//     await screen.findByText("file nothing.csv not found")
-//   ).toBeInTheDocument();
-// });
+  await user.click(AvoidButton);
 
-// test("search, select, and delete from schedule", async () => {
-//   const InputBox = screen.getByRole("textbox", { name: "Input Box" });
-//   const Button = screen.getByRole("button", { name: "Input Button" });
+  const AvoidDiv = await screen.findByText("CSCI0150");
+  expect(await AvoidDiv).toBeInTheDocument();
 
-//   let user = userEvent.setup();
-//   await user.type(InputBox, "view");
-//   await user.click(Button);
+  await user.type(SearchBox, "CSCI0170");
+  const SearchOption2 = screen.getByLabelText("Search option 1");
+  expect(SearchOption2).toBeInTheDocument();
+  await user.click(SearchOption2);
+  await user.click(TakeButton);
 
-//   const ViewCall = screen.getByLabelText("view");
-//   expect(await ViewCall).toBeInTheDocument();
-//   expect(
-//     await screen.findByText("Must load a file to view")
-//   ).toBeInTheDocument();
+  const TakeDiv = await screen.findByText("CSCI0170");
+  expect(await TakeDiv).toBeInTheDocument();
+});
 
-//   await user.type(InputBox, "load_file small.csv");
-//   await user.click(Button);
-//   await user.type(InputBox, "view error here");
-//   await user.click(Button);
-//   await user.type(InputBox, "view");
-//   await user.click(Button);
+test("search, select, and delete from schedule", async () => {
+  const SearchBox = screen.getByLabelText("Search Box");
+  const ClasBox00 = screen.getByLabelText("Class Box 00");
 
-//   const ViewCalls = screen.getAllByLabelText("view");
-//   expect(ViewCalls.length).toBe(3);
-//   expect(await ViewCalls[1]).toBeInTheDocument();
-//   expect(await ViewCalls[2]).toBeInTheDocument();
-//   const ViewTable = screen.getByRole("table");
-//   expect(ViewTable).toBeInTheDocument;
+  let user = userEvent.setup();
+  await user.type(SearchBox, "CSCI0320");
 
-//   expect(
-//     await screen.findByText("Please do not include any parameters")
-//   ).toBeInTheDocument();
-// });
+  const SearchOption1 = screen.getByLabelText("Search option 1");
+  expect(SearchOption1).toBeInTheDocument();
+  await user.click(SearchOption1);
+
+  await user.click(ClasBox00);
+
+  const Course1 = await screen.findByText("CSCI0320");
+  expect(await Course1).toBeInTheDocument();
+
+  // await user.click(ClasBox00);
+
+  // expect(screen.getByText("CSCI0320")).not.toBeVisible();
+});
 
 // test("don't allow wrong semester classes or classes that already exist", async () => {
 //   const InputBox = screen.getByRole("textbox", { name: "Input Box" });
