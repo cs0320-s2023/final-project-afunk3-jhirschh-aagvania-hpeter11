@@ -159,7 +159,7 @@
       ["MATH0520", "MATH0540"],
       ["CSCI0220", "CSCI1450", "APMA1650", "APMA1655"]
     ],
-    "season": "Spring"
+    "season": "Both"
   },
   {
     "courseCode": "CSCI1510",
